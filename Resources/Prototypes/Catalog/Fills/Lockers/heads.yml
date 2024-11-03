@@ -227,6 +227,7 @@
     - id: MedicalTechFabCircuitboard
     - id: MedkitFilled
     - id: RubberStampCMO
+    - id: MedicalBiofabMachineBoard # backmen
     - id: MedTekCartridge
     - id: ADTtelescopicBaton # ADT
 

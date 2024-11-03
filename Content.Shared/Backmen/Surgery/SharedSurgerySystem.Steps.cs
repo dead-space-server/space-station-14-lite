@@ -75,7 +75,6 @@ public abstract partial class SharedSurgerySystem
                 var compType = reg.Component.GetType();
                 if (HasComp(args.Part, compType))
                     continue;
-
                 AddComp(args.Part, _compFactory.GetComponent(compType));
             }
         }
@@ -401,7 +400,7 @@ public abstract partial class SharedSurgerySystem
         var user = args.Actor;
         if (GetEntity(args.Entity) is not { Valid: true } body ||
             GetEntity(args.Part) is not { Valid: true } targetPart ||
-            !IsSurgeryValid(body, targetPart, args.Surgery, args.Step, out var surgery, out var part, out var step))
+            !IsSurgeryValid(body, targetPart, args.Surgery, args.Step, user, out var surgery, out var part, out var step))
         {
             return;
         }
@@ -557,7 +556,6 @@ public abstract partial class SharedSurgerySystem
 
         var ev = new SurgeryStepCompleteCheckEvent(body, part, surgery);
         RaiseLocalEvent(stepEnt, ref ev);
-
         return !ev.Cancelled;
     }
 
