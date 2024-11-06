@@ -1,7 +1,10 @@
 ﻿using Content.Shared.Backmen.Surgery.Tools;
+using Content.Shared.Backmen.Targeting;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
+using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
@@ -36,6 +39,13 @@ public sealed partial class BodyPartComponent : Component, ISurgeryToolComponent
     [DataField("vital"), AutoNetworkedField]
     public bool IsVital;
 
+    /// <summary>
+    /// Amount of damage to deal when the part gets removed.
+    /// Only works if IsVital is true.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 VitalDamage = 100;
+
     [DataField, AutoNetworkedField]
     public BodyPartSymmetry Symmetry = BodyPartSymmetry.None;
 
@@ -60,10 +70,54 @@ public sealed partial class BodyPartComponent : Component, ISurgeryToolComponent
     /// <summary>
     /// How much health the body part has until it pops out.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public float Integrity = 70f;
+    [ViewVariables]
+    public float TotalDamage => Damage.GetTotal().Float();
 
-    public const float MaxIntegrity = 70;
+    /// <summary>
+    /// The DamageSpecifier that contains all types of damage that the BodyPart can take.
+    /// TODO: Rework this with DamageableComponent
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public DamageSpecifier Damage = new()
+    {
+        DamageDict = new Dictionary<string, FixedPoint2>
+        {
+            { "Blunt", 0 },
+            { "Slash", 0 },
+            { "Piercing", 0 },
+            { "Heat", 0 },
+            { "Cold", 0 },
+            { "Shock", 0 },
+            { "Caustic", 0 },
+        }
+    };
+
+    [DataField, AutoNetworkedField]
+    public float MinIntegrity = 0;
+
+    /// <summary>
+    /// The total damage that has to be dealt to a body part
+    /// to make possible severing it.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float SeverIntegrity = 70;
+
+    /// <summary>
+    /// On what TargetIntegrity we should re-enable the part.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TargetIntegrity EnableIntegrity = TargetIntegrity.ModeratelyWounded;
+
+    [DataField, AutoNetworkedField]
+    public Dictionary<TargetIntegrity, float> IntegrityThresholds = new()
+    {
+        { TargetIntegrity.CriticallyWounded, 70 },
+        { TargetIntegrity.HeavilyWounded, 56 },
+        { TargetIntegrity.ModeratelyWounded, 42 },
+        { TargetIntegrity.SomewhatWounded, 28},
+        { TargetIntegrity.LightlyWounded, 17 },
+        { TargetIntegrity.Healthy, 7 },
+    };
 
     /// <summary>
     /// Whether this body part is enabled or not.

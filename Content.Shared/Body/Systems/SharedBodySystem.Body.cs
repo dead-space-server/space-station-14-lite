@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Numerics;
+using Content.Shared.Backmen.Targeting;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Organ;
 using Content.Shared.Body.Part;
@@ -7,9 +8,11 @@ using Content.Shared.Body.Prototypes;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Damage;
 using Content.Shared.DragDrop;
+using Content.Shared.FixedPoint;
 using Content.Shared.Gibbing.Components;
 using Content.Shared.Gibbing.Events;
 using Content.Shared.Gibbing.Systems;
+using Content.Shared.Humanoid;
 using Content.Shared.Inventory;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Standing;
@@ -19,7 +22,6 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Utility;
 using Robust.Shared.Timing;
-
 namespace Content.Shared.Body.Systems;
 
 public partial class SharedBodySystem
@@ -143,21 +145,29 @@ public partial class SharedBodySystem
 
     private void OnDamageChanged(Entity<BodyComponent> ent, ref DamageChangedEvent args)
     {
-        if (args.PartMultiplier == 0
-            || ent.Comp is null
-            || args.TargetPart is null
-            || args.DamageDelta is null
-            || !args.DamageIncreased
-            && !args.DamageDecreased)
+        if (!_gameTiming.IsFirstTimePredicted)
             return;
 
-        var (targetType, targetSymmetry) = ConvertTargetBodyPart(args.TargetPart.Value);
-        Logger.Debug($"Applying damage to {ToPrettyString(ent)} with {ent.Comp} and {args} {targetType} {targetSymmetry}");
-        foreach (var part in GetBodyChildrenOfType(ent, targetType, ent.Comp)
-            .Where(part => part.Component.Symmetry == targetSymmetry))
+        DebugTools.Assert(ent.Comp is not null);
+        if (args.PartMultiplier == 0
+            || args.TargetPart is null
+            || args.DamageDelta is null
+            || args is { DamageIncreased: false, DamageDecreased: false })
+            return;
+
+        // Go through every flag and apply damage to them.
+        var targets = SharedTargetingSystem.GetValidParts();
+        foreach (var target in targets)
         {
-            if (_gameTiming.IsFirstTimePredicted)
-                ApplyPartDamage(part, args.DamageDelta, targetType, args.TargetPart.Value, args.CanSever, args.PartMultiplier);
+            if (!args.TargetPart.Value.HasFlag(target))
+                continue;
+
+            var (targetType, targetSymmetry) = ConvertTargetBodyPart(target);
+            foreach (var part in GetBodyChildrenOfType(ent, targetType, ent.Comp)
+                         .Where(part => part.Component.Symmetry == targetSymmetry))
+            {
+                ApplyPartDamage(part, args.DamageDelta, targetType, target, args.CanSever, args.Evade, args.PartMultiplier);
+            }
         }
     }
 
@@ -165,7 +175,8 @@ public partial class SharedBodySystem
     {
         foreach (var part in GetBodyChildren(ent, ent.Comp))
         {
-            TryChangeIntegrity(part, part.Component.Integrity - BodyPartComponent.MaxIntegrity, false, GetTargetBodyPart(part), out _);
+            var healing = GetHealingSpecifier(part.Component);
+            TrySetIntegrity(part, healing, false, GetTargetBodyPart(part), out _);
         }
     }
 
@@ -219,6 +230,22 @@ public partial class SharedBodySystem
                     QueueDel(childPart);
                     continue;
                 }
+
+                // start-backmen: surgery
+                if (TryComp(parentPartComponent.Body, out HumanoidAppearanceComponent? bodyAppearance))
+                {
+                    var appearance = AddComp<BodyPartAppearanceComponent>(childPart);
+                    appearance.OriginalBody = childPartComponent.OriginalBody;
+                    appearance.Color = bodyAppearance.SkinColor;
+
+                    var symmetry = ((BodyPartSymmetry) childPartComponent.Symmetry).ToString();
+                    if (symmetry == "None")
+                        symmetry = "";
+                    appearance.ID = "removed" + symmetry + ((BodyPartType) childPartComponent.PartType).ToString();
+
+                    Dirty(childPart, appearance);
+                }
+                // end-backmen: surgery
 
                 // Add organs
                 SetupOrgans((childPart, childPartComponent), connectionSlot.Organs);
@@ -390,18 +417,28 @@ public partial class SharedBodySystem
     {
         var gibs = new HashSet<EntityUid>();
 
-        _gibbingSystem.TryGibEntityWithRef(partId, partId, GibType.Gib, GibContentsOption.Drop, ref gibs,
-                playAudio: true, launchGibs: true, launchDirection: splatDirection, launchImpulse: GibletLaunchImpulse * splatModifier,
-                launchImpulseVariance: GibletLaunchImpulseVariance, launchCone: splatCone);
+        _gibbingSystem.TryGibEntityWithRef(
+            partId,
+            partId,
+            GibType.Gib,
+            GibContentsOption.Drop,
+            ref gibs,
+            playAudio: true,
+            launchGibs: true,
+            launchDirection: splatDirection,
+            launchImpulse: GibletLaunchImpulse * splatModifier,
+            launchImpulseVariance: GibletLaunchImpulseVariance,
+            launchCone: splatCone);
 
         if (TryComp<InventoryComponent>(partId, out var inventory))
         {
-            foreach (var item in _inventory.GetHandOrInventoryEntities(partId))
+            foreach (var item in _inventory.GetHandOrInventoryEntities((partId, null, inventory)))
             {
                 SharedTransform.AttachToGridOrMap(item);
                 gibs.Add(item);
             }
         }
+
         _audioSystem.PlayPredicted(gibSoundOverride, Transform(partId).Coordinates, null);
         return gibs;
     }
