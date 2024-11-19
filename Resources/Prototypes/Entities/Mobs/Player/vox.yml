@@ -3,3 +3,7 @@
   name: Uristititi McVox
   parent: BaseMobVox
   id: MobVox
+  components:
+    - type: FootPrints
+      leftBarePrint: "footprint-left-bare-lizard"
+      rightBarePrint: "footprint-right-bare-lizard"

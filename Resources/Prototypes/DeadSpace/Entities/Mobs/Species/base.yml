@@ -124,3 +124,6 @@
       Female: IPSIPC
       Unsexed: IPSIPC
   - type: ComputerEmotes # DS14: For emote panel
+  - type: FootPrints
+    leftBarePrint: "footprint-left-bare-human"
+    rightBarePrint: "footprint-right-bare-human"

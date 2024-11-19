@@ -54,6 +54,9 @@
   - type: Speech
     speechSounds: Vulpkanin
   - type: Vulpkanin # DS14: For emote panel
+  - type: FootPrints
+    leftBarePrint: "footprint-left-bare-human"
+    rightBarePrint: "footprint-right-bare-human"
 
 - type: entity
   save: false

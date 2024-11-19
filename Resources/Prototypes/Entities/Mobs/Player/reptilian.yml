@@ -4,5 +4,8 @@
   # suffix: Urisst' Mzhand
   parent: BaseMobReptilian
   id: MobReptilian
-
+  components:
+    - type: FootPrints
+      leftBarePrint: "footprint-left-bare-lizard"
+      rightBarePrint: "footprint-right-bare-lizard"
 #Weh

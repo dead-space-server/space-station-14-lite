@@ -38,11 +38,13 @@
   wage: 100
   #end-backmen: currency
   special:
-  - !type:AddImplantSpecial
-    implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
-      - type: CommandStaff
+    - type: CommandStaff
+    - type: SurgerySpeedModifier
+      SpeedModifier: 2.5
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant ]
 
 - type: startingGear
   id: CMOGear
