@@ -21,7 +21,7 @@
     wideAnimationRotation: -90
     damage:
       types:
-        Piercing: 2
+        Piercing: 4
     attackRate: 2 #open and close that shit on their arm like hell! because you sure aren't doing any damage with this
     soundHit:
       path: "/Audio/Items/wirecutter.ogg"

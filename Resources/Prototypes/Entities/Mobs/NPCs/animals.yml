@@ -1,6 +1,6 @@
 - type: entity
   name: bat
-  parent: [ SimpleMobBase, FlyingMobBase, MobCombat ]
+  parent: [ SimpleMobBase, FlyingMobBase ]
   id: MobBat
   description: Some cultures find them terrifying, others crunchy on the teeth.
   components:
@@ -64,6 +64,10 @@
   - type: Tag
     tags:
     - VimPilot
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      10: Dead
 
 - type: entity
   name: bee
@@ -378,14 +382,14 @@
     tags:
     - Trash
     - VimPilot
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Blunt
-        damage: 10
-      behaviors:
-      - !type:GibBehavior { }
+  # - type: Destructible
+  #   thresholds:
+  #   - trigger:
+  #       !type:DamageTypeTrigger
+  #       damageType: Blunt
+  #       damage: 10
+  #     behaviors:
+  #     - !type:GibBehavior { }
   - type: NonSpreaderZombie
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-organic
@@ -401,7 +405,6 @@
 - type: entity
   name: glockroach
   parent: MobCockroach
-  suffix: Admeme
   id: MobGlockroach
   description: This station is just crawling with bu- OH GOD THAT COCKROACH HAS A GUN!!!
   components:
@@ -418,7 +421,7 @@
     soundGunshot: /Audio/Weapons/Guns/Gunshots/pistol.ogg
   - type: BallisticAmmoProvider
     proto: CartridgeCaselessRifle
-    capacity: 500
+    capacity: 50
   - type: CombatMode
   - type: HTN
     rootTask:
@@ -429,6 +432,11 @@
   - type: Butcherable
     spawned:
     - id: FoodMeatSlime
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 3
+    baseSprintSpeed : 5.1
+  - type: TTS
+    voice: Bandit
 
 - type: entity
   name: mothroach
@@ -855,6 +863,10 @@
     guides:
     - Chef
     - FoodRecipes
+  - type: ReplacementAccent
+    accent: cow
+  - type: TTS
+    voice: Thrud
 
 - type: entity
   name: crab
@@ -923,6 +935,7 @@
       task: RuminantCompound
   - type: Body
     prototype: AnimalHemocyanin
+
 
 - type: entity
   name: goat
@@ -1207,6 +1220,8 @@
   - type: HTN
     rootTask:
       task: SimpleHostileCompound
+  - type: TTS
+    voice: Ycf
 
 - type: entity
   name: boxing kangaroo
@@ -1334,8 +1349,6 @@
       methods: [ Touch ]
       effects:
       - !type:WashCreamPieReaction
-
-
 
 - type: entity
   name: monkey
@@ -1715,6 +1728,7 @@
     - ChefPilot
     - Mouse
     - Meat
+    - FelinidFood
   - type: Respirator
     damage:
       types:
@@ -2101,6 +2115,7 @@
   - type: Bloodstream
     bloodMaxVolume: 50
 
+
 - type: entity
   name: penguin
   parent: SimpleMobBase
@@ -2161,6 +2176,7 @@
     heatDamage:
       types:
         Heat : 0.2 #per second, scales with temperature & other constants
+
 
 - type: entity
   name: grenade penguin
@@ -2537,6 +2553,7 @@
     tags:
     - VimPilot
 
+
 - type: entity
   name: possum
   parent: MobPossum
@@ -2610,6 +2627,7 @@
   - type: Tag
     tags:
     - VimPilot
+
 
 - type: entity
   name: fox
@@ -2689,6 +2707,7 @@
     tags:
     - VimPilot
 
+
 - type: entity
   name: corgi
   parent: [SimpleMobBase, StripableInventoryBase]
@@ -2703,6 +2722,7 @@
       state: corgi
   - type: Physics
   - type: Speech
+    speechSounds: Dog
     speechVerb: Canine
   - type: Fixtures
     fixtures:
@@ -2748,6 +2768,7 @@
   - type: Tag
     tags:
     - VimPilot
+
 
 - type: entity
   name: corrupted corgi
@@ -2905,6 +2926,7 @@
   - type: Tag
     tags:
     - VimPilot
+
 
 - type: entity
   name: calico cat

@@ -215,3 +215,28 @@
   - type: StorageFill
     contents:
       - id: SpaceHeaterFlatpack
+
+# ADT
+- type: entity
+  id: CrateEngineeringVoidJetpack
+  parent: CrateGenericSteel
+  components:
+  - type: StorageFill
+    contents:
+      - id: JetpackVoid
+        amount: 2
+
+- type: entity
+  id: ADTCargoUtilisatorComplectCrate
+  parent: CrateGenericSteel
+  components:
+  - type: StorageFill
+    contents:
+      - id: ClothingOuterHardsuitSpatio
+      - id: ClothingMaskGasExplorer
+      - id: ClothingShoesBootsMag
+      - id: ClothingUniformJumpsuitSalvageSpecialist
+      - id: ClothingBackpackSatchelSalvage
+      - id: ClothingBackpackDuffelSalvage
+      - id: ClothingBackpackSalvage
+      - id: SurvivalKnife

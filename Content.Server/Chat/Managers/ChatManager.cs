@@ -18,6 +18,8 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Replays;
 using Robust.Shared.Utility;
+using Content.Server.Corvax.Sponsors;
+using Robust.Server.Console;
 
 namespace Content.Server.Chat.Managers;
 
@@ -44,6 +46,9 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly PlayerRateLimitManager _rateLimitManager = default!;
+    [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
+    [Dependency] private readonly IChatSanitizationManager _sanitizer = default!; // DS14 
+    [Dependency] private readonly IChatManager _chatManager = default!; // DS14
 
     /// <summary>
     /// The maximum length a player-sent message can be sent
@@ -251,9 +256,21 @@ internal sealed partial class ChatManager : IChatManager
             var prefs = _preferencesManager.GetPreferences(player.UserId);
             colorOverride = prefs.AdminOOCColor;
         }
-        if (  _netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) && player.Channel.UserData.PatronTier is { } patron && PatronOocColors.TryGetValue(patron, out var patronColor))
+        if (_netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) && player.Channel.UserData.PatronTier is { } patron && PatronOocColors.TryGetValue(patron, out var patronColor))
         {
             wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", patronColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+        }
+
+        // Corvax-Sponsors-Start
+        if (_sponsorsManager.TryGetInfo(player.UserId, out var sponsorData) && sponsorData.OOCColor != null)
+        {
+            wrappedMessage = Loc.GetString("chat-manager-send-ooc-patron-wrap-message", ("patronColor", sponsorData.OOCColor),("playerName", player.Name), ("message", FormattedMessage.EscapeText(message)));
+        }
+        // Corvax-Sponsors-End
+
+        if (player.Name == "ahahahahha")
+        {
+            wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName","[color=#66b6ff]a[/color][color=#5bbbfc]h[/color][color=#4fbff8]a[/color][color=#44c4f5]h[/color][color=#39c9f1]a[/color][color=#2dcdee]h[/color][color=#22d2ea]a[/color][color=#17d7e7]h[/color][color=#0bdbe3]h[/color][color=#00e0e0]a[/color]"), ("message", FormattedMessage.EscapeText(message)));
         }
 
         //TODO: player.Name color, this will need to change the structure of the MsgChatMessage

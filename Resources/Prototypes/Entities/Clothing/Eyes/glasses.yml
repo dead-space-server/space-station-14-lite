@@ -68,6 +68,19 @@
 
 - type: entity
   parent: ClothingEyesBase
+  id: ClothingEyesGlassesMesonCE
+  name: chief engineer super goggles
+  description: Green-tinted goggles using a proprietary polymer that provides protection from eye damage of all types.
+  components:
+  - type: Sprite
+    sprite: Clothing/Eyes/Glasses/mesonce.rsi
+  - type: Clothing
+    sprite: Clothing/Eyes/Glasses/mesonce.rsi
+  - type: EyeProtection
+  - type: FlashImmunity
+
+- type: entity
+  parent: ClothingEyesBase
   id: ClothingEyesGlasses
   name: glasses
   description: A pair of spectacular spectacles with prescription lenses.

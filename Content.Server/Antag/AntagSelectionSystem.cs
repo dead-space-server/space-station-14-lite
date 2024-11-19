@@ -30,6 +30,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
+using Content.Server.Corvax.Sponsors;
 
 namespace Content.Server.Antag;
 
@@ -46,6 +47,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     [Dependency] private readonly RoleSystem _role = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SponsorsManager _sponsors = default!;
 
     // arbitrary random number to give late joining some mild interest.
     public const float LateJoinRandomChance = 0.5f;
@@ -375,6 +377,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
     /// </summary>
     public AntagSelectionPlayerPool GetPlayerPool(Entity<AntagSelectionComponent> ent, IList<ICommonSession> sessions, AntagSelectionDefinition def)
     {
+        var sponsorList = new List<ICommonSession>();
         var preferredList = new List<ICommonSession>();
         var fallbackList = new List<ICommonSession>();
         foreach (var session in sessions)
@@ -382,7 +385,12 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             if (!IsSessionValid(ent, session, def) || !IsEntityValid(session.AttachedEntity, def))
                 continue;
 
-            if (HasPrimaryAntagPreference(session, def))
+            if (HasPrimaryAntagPreference(session, def) && def.SponsorPriority
+                && _sponsors.TryGetInfo(session.UserId, out var sponsorInfo) && sponsorInfo.HavePriorityAntag)
+            {
+                sponsorList.Add(session);
+            }
+            else if (HasPrimaryAntagPreference(session, def))
             {
                 preferredList.Add(session);
             }
@@ -392,7 +400,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
             }
         }
 
-        return new AntagSelectionPlayerPool(new() { preferredList, fallbackList });
+        return new AntagSelectionPlayerPool(new() { sponsorList, preferredList, fallbackList });
     }
 
     /// <summary>

@@ -62,6 +62,10 @@
   - type: Tag
     tags:
     - BypassInteractionRangeChecks
+  - type: TypingIndicator
+    proto: default
+  - type: ShowJobIcons
+  - type: ShowMindShieldIcons
 
 # proto for player ghosts specifically
 - type: entity

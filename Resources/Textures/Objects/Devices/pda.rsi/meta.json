@@ -35,6 +35,9 @@
       "name": "pda-atmos"
     },
     {
+      "name": "pda-surgeon"
+    },
+    {
       "name": "pda-bartender"
     },
     {
@@ -229,6 +232,29 @@
     {
       "name": "equipped-IDCARD",
       "directions": 4
+    },
+    {
+      "name": "pda-cburn"
+    },
+    {
+      "name": "pda-investigator"
+    },
+    {
+      "name": "pda-coroner",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "pda-seniorservice"
+    },
+    {
+      "name": "pda-seniorminer"
     }
   ]
 }

@@ -1185,7 +1185,7 @@
     node: wall
 
 
-# Lavalend Walls
+# Lavaland Walls
 
 - type: entity
   parent: BaseWall
@@ -1317,7 +1317,7 @@
   name: invisible wall
   components:
   - type: TimedDespawn
-    lifetime: 15
+    lifetime: 20
   - type: Tag
     tags:
       - Wall

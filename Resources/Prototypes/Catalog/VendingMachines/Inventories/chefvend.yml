@@ -5,6 +5,7 @@
     ReagentContainerCornmeal: 2
     ReagentContainerSugar: 2
     ReagentContainerRice: 2
+    ADTReagentContainerCocoaSolid: 4
     FoodCondimentPacketSalt: 4
     FoodCondimentBottleEnzyme: 2
     FoodCondimentBottleHotsauce: 1
@@ -12,7 +13,7 @@
     FoodCondimentBottleBBQ: 1
     FoodCondimentBottleVinegar: 2
     ReagentContainerOliveoil: 2
-    ReagentContainerMayo: 1
+    ReagentContainerMayo: 4
     VariantCubeBox: 1
     FoodContainerEgg: 1
     DrinkMilkCarton: 2
@@ -20,4 +21,4 @@
     FoodButter: 3
     FoodCheese: 1
     FoodMeat: 6
-    
+    ADTFoodSausageRaw: 12

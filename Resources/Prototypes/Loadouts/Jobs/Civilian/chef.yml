@@ -36,3 +36,28 @@
   id: ChefWintercoat
   equipment:
     outerClothing: ClothingOuterWinterChef
+
+# Underwear
+- type: loadout
+  id: UnderwearBottomBoxersChef
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: MaleUnderwear
+  equipment:
+    underwearb: ClothingUnderwearBottomBoxersChef
+
+- type: loadout
+  id: UnderwearBottomPantiesChef
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleUnderwear
+  equipment:
+    underwearb: ClothingUnderwearBottomPantiesChef
+
+- type: loadout
+  id: UnderwearTopBraChef
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: FemaleUnderwear
+  equipment:
+    underweart: ClothingUnderwearTopBraChef

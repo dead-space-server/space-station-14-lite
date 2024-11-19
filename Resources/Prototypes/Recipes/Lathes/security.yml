@@ -480,6 +480,13 @@
 
 - type: latheRecipe
   parent: BaseAmmoRecipe
+  id: MagazineBox357Incendiary
+  result: MagazineBox357Incendiary
+  materials:
+    Plastic: 1000
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
   id: MagazineBoxLightRifleIncendiary
   result: MagazineBoxLightRifleIncendiary
   materials:
@@ -491,6 +498,13 @@
   result: MagazineBoxRifleIncendiary
   materials:
     Plastic: 750
+
+- type: latheRecipe
+  parent: BaseAmmoRecipe
+  id: SpeedLoader357
+  result: SpeedLoader357
+  materials:
+    Steel: 1500
 
 - type: latheRecipe
   parent: BaseAmmoRecipe

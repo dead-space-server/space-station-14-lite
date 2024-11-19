@@ -152,7 +152,7 @@
     - DoorBumpOpener
   - type: Puller
     needsHands: false
-    
+
 - type: entity
   parent: BaseMobDragon
   id: MobDragon
@@ -194,6 +194,9 @@
   - type: GhostRole
     description: ghost-role-information-space-dragon-dungeon-description
     rules: ghost-role-information-space-dragon-dungeon-rules
+    requirements:
+    - !type:OverallPlaytimeRequirement
+      time: 36000 # 10h overall
     raffle:
       settings: default
   - type: SlowOnDamage
@@ -207,7 +210,7 @@
   - type: Butcherable
     spawned:
     - id: FoodMeatDragon
-      amount: 1
+      amount: 3
   - type: MeleeWeapon
     damage:
       groups:

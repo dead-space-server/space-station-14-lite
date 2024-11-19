@@ -53,7 +53,7 @@
             "name": "box_hug"
         },
         {
-            "name": "box_id"
+            "name": "box_medical"
         },
         {
             "name": "box_of_doom"
@@ -161,7 +161,10 @@
             "name": "headset"
         },
         {
-            "name": "encryptokey"
+			"name": "encryptokey"
+		},
+        {
+            "name": "id"
         },
         {
             "name": "inhand-left",

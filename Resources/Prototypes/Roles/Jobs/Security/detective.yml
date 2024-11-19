@@ -17,8 +17,12 @@
   - Maintenance
   - Service
   - Detective
-  - Cryogenics
-  - External
+  #start-backmen: currency
+  minBankBalance: 150
+  maxBankBalance: 250
+  wageDepartment: Security
+  wage: 50
+  #end-backmen: currency
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
@@ -30,6 +34,7 @@
     id: DetectivePDA
     ears: ClothingHeadsetSecurity
     belt: ClothingBeltHolsterFilled
+    socks: ClothingUnderwearSocksDetective
   storage:
     back:
     - Flash

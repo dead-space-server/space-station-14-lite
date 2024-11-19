@@ -1,0 +1,8 @@
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ADTClothingOuterCoatLabSec
+  components:
+  - type: Sprite
+    sprite: ADT/Clothing/OuterClothing/Coats/labcoat_sec.rsi
+  - type: Clothing
+    sprite: ADT/Clothing/OuterClothing/Coats/labcoat_sec.rsi

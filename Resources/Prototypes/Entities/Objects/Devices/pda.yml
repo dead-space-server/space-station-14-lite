@@ -195,7 +195,7 @@
     state: pda-interncadet
   - type: PdaBorderColor
     borderColor: "#717059"
-    accentVColor: "#A32D26"
+    accentVColor: "#005E72"
   - type: Icon
     state: pda-interncadet
 
@@ -397,8 +397,8 @@
     id: SalvageIDCard
     state: pda-miner
   - type: PdaBorderColor
-    borderColor: "#af9366"
-    accentVColor: "#8900c9"
+    borderColor: "#735321"
+    accentVColor: "#62237F"
   - type: Icon
     state: pda-miner
   - type: CartridgeLoader
@@ -611,6 +611,24 @@
 
 - type: entity
   parent: BaseMedicalPDA
+  id: SurgeonPDA
+  name: surgeon PDA
+  description: Red spots remained after one of the operations.
+  components:
+  - type: Pda
+    id: SurgeonIDCard
+    state: pda-surgeon
+  - type: PdaBorderColor
+    borderColor: "#d7d7d0"
+    accentVColor: "#447987"
+  - type: Icon
+    state: pda-surgeon
+  - type: GuideHelp
+    guides:
+    - Medical Doctor
+
+- type: entity
+  parent: BaseMedicalPDA
   id: ParamedicPDA
   name: paramedic PDA
   description: Shiny and sterile.
@@ -680,7 +698,7 @@
     id: HoSIDCard
     state: pda-hos
   - type: PdaBorderColor
-    borderColor: "#A32D26"
+    borderColor: "#005E72"
     accentHColor: "#447987"
   - type: Icon
     state: pda-hos
@@ -702,7 +720,7 @@
     id: WardenIDCard
     state: pda-warden
   - type: PdaBorderColor
-    borderColor: "#A32D26"
+    borderColor: "#005E72"
     accentVColor: "#949137"
   - type: Icon
     state: pda-warden
@@ -717,7 +735,7 @@
     id: SecurityIDCard
     state: pda-security
   - type: PdaBorderColor
-    borderColor: "#A32D26"
+    borderColor: "#005E72"
   - type: Icon
     state: pda-security
 
@@ -749,6 +767,38 @@
       - WantedListCartridge
       - LogProbeCartridge
       - AstroNavCartridge
+
+# DS14-centcom-jobs-start
+
+- type: entity
+  parent: CentcomPDA
+  id: CentcomOfficialPDA
+  components:
+  - type: Pda
+    id: CentcomOfficialIDCard
+
+- type: entity
+  parent: CentcomPDA
+  id: CentcomAdministratorPDA
+  components:
+  - type: Pda
+    id: CentcomAdministratorIDCard
+
+- type: entity
+  parent: CentcomPDA
+  id: CentcomOperatorPDA
+  components:
+  - type: Pda
+    id: CentcomOperatorIDCard
+
+- type: entity
+  parent: CentcomPDA
+  id: CentcomSpecialOperationsOfficerPDA
+  components:
+  - type: Pda
+    id: CentcomSpecialOperationsOfficerIDCard
+
+# DS14-centcom-jobs-end
 
 - type: entity
   parent: CentcomPDA
@@ -942,6 +992,24 @@
   - type: Pda
     id: ERTSecurityIDCard
 
+# DS14-ert-start
+
+- type: entity
+  parent: ERTLeaderPDA
+  id: ERTLeaderRedPDA
+  components:
+  - type: Pda
+    id: ERTLeaderRedIDCard
+
+- type: entity
+  parent: ERTLeaderPDA
+  id: ERTLeaderGammaPDA
+  components:
+  - type: Pda
+    id: ERTLeaderGammaIDCard
+
+# DS14-ert-end
+
 - type: entity
   parent: ERTLeaderPDA
   id: CBURNPDA
@@ -950,10 +1018,36 @@
   components:
   - type: Pda
     id: CBURNIDcard
+    state: pda-cburn
   - type: PdaBorderColor
-    borderColor: "#A32D26"
-    accentHColor: "#447987"
-    accentVColor: "#447987"
+    borderColor: "#171E1B"
+    accentHColor: "#54685F"
+    accentVColor: "#54685F"
+
+# DS14-cburn-start
+
+- type: entity
+  parent: CBURNPDA
+  id: CBURNLeaderPDA
+  components:
+  - type: Pda
+    id: CBURNLeaderIDcard
+
+- type: entity
+  parent: CBURNPDA
+  id: CBURNSierraPDA
+  components:
+  - type: Pda
+    id: CBURNSierraIDcard
+
+- type: entity
+  parent: CBURNPDA
+  id: CBURNSierraLeaderPDA
+  components:
+  - type: Pda
+    id: CBURNSierraLeaderIDcard
+
+# DS14-cburn-end
 
 - type: entity
   parent: BasePDA
@@ -1050,9 +1144,9 @@
     id: BrigmedicIDCard
     state: pda-brigmedic
   - type: PdaBorderColor
-    borderColor: "#A32D26"
-    accentHColor: "#d7d7d0"
-    accentVColor: "#d7d7d0"
+    borderColor: "#005E72"
+    accentHColor: "#D7D7d0"
+    accentVColor: "#D7D7D0"
   - type: Icon
     state: pda-brigmedic
   - type: CartridgeLoader
@@ -1159,6 +1253,67 @@
     state: pda-pirate
   - type: Icon
     state: pda-pirate
+
+- type: entity
+  parent: BasePDA
+  id: CoronerPDA
+  name: coroner PDA
+  description: I wonder whose pulse is on the screen? I hope he doesn't stop...
+  components:
+  - type: Pda
+    id: CoronerIDCard
+    state: pda-coroner
+  - type: PdaBorderColor
+    borderColor: "#212121"
+    accentHColor: "#EAEAEA"
+    accentVColor: "#EAEAEA"
+  - type: Icon
+    state: pda-coroner
+
+- type: entity
+  parent: BasePDA
+  id: SecurityPilotPDA
+  name: security pilot PDA
+  description: Smells like space shuttles.
+  components:
+  - type: Pda
+    id: SecurityPilotIDCard
+    state: pda-security
+  - type: PdaBorderColor
+    borderColor: "#A32D26"
+  - type: Icon
+    state: pda-security
+
+- type: entity
+  parent: BasePDA
+  id: SeniorSalvagePDA
+  name: senior salvage PDA
+  description: Smells like ash.
+  components:
+  - type: Pda
+    id: SeniorSalvageIDCard
+    state: pda-seniorminer
+  - type: PdaBorderColor
+    borderColor: "#735321"
+    accentHColor: "#62237F"
+    accentVColor: "#62237F"
+  - type: Icon
+    state: pda-seniorminer
+
+- type: entity
+  parent: BasePDA
+  id: SeniorServicePDA
+  name: senior service PDA
+  description: Smells like service dep.
+  components:
+  - type: Pda
+    id: SeniorServiceIDCard
+    state: pda-seniorservice
+  - type: PdaBorderColor
+    borderColor: "#789876"
+    accentHColor: "#CEC155"
+  - type: Icon
+    state: pda-seniorservice
 
 - type: entity
   parent: BaseMedicalPDA

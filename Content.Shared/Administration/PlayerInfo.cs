@@ -10,6 +10,7 @@ public sealed record PlayerInfo(
     string IdentityName,
     string StartingJob,
     bool Antag,
+    bool Sponsor, // ADT
     NetEntity? NetEntity,
     NetUserId SessionId,
     bool Connected,

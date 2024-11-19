@@ -101,6 +101,8 @@
     price: 100
   - type: Appearance
   - type: WiresVisuals
+  - type: TTS
+    voice: TrainingRobot
 
 - type: entity
   parent: VendingMachine
@@ -153,7 +155,7 @@
     pack: GenericVendGoodbyes
   - type: Speech
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/ammo.rsi
+    sprite: Corvax/Structures/Machines/VendingMachines/ammo.rsi
     layers:
     - state: "off"
       map: ["enum.VendingMachineVisualLayers.Base"]
@@ -326,6 +328,8 @@
       shader: unshaded
     - state: panel
       map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: TTS
+    voice: Tereshkova
 
 - type: entity
   parent: VendingMachine
@@ -924,6 +928,8 @@
     guides:
     - Security
     - Antagonists
+  - type: TTS
+    voice: Glowtron
 
 - type: entity
   parent: VendingMachine
@@ -1559,9 +1565,11 @@
   - type: PointLight
     radius: 1.5
     energy: 1.6
-    color: "#d82929"
+    color: "#294ba3"
   - type: AccessReader
     access: [["Security"]]
+  - type: TTS
+    voice: Glowtron
 
 - type: entity
   parent: VendingMachine

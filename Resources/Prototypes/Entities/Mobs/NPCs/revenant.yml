@@ -36,7 +36,7 @@
     makeSentient: true
     name: ghost-role-information-revenant-name
     description: ghost-role-information-revenant-description
-    rules: ghost-role-information-antagonist-rules
+    rules: ghost-role-information-revenant-rules
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -69,10 +69,12 @@
     - StolenEssence
   - type: RandomMetadata
     nameSegments:
-    - The
+#    - The
     - RevenantType
-    - of
+#    - of
     - RevenantAdjective
     - RevenantTheme
   - type: Speech
     speechVerb: Ghost
+  - type: TTS # Corvax-TTS
+    voice: Kelthuzad

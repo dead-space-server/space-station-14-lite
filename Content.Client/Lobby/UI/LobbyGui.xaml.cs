@@ -19,7 +19,7 @@ namespace Content.Client.Lobby.UI
             SetAnchorPreset(MainContainer, LayoutPreset.Wide);
             SetAnchorPreset(Background, LayoutPreset.Wide);
 
-            LobbySong.SetMarkup(Loc.GetString("lobby-state-song-no-song-text"));
+            // LobbySong.SetMarkup(Loc.GetString("lobby-state-song-no-song-text")); // DS14
 
             LeaveButton.OnPressed += _ => _consoleHost.ExecuteCommand("disconnect");
             OptionsButton.OnPressed += _ => UserInterfaceManager.GetUIController<OptionsUIController>().ToggleWindow();
@@ -35,6 +35,7 @@ namespace Content.Client.Lobby.UI
                 case LobbyGuiState.Default:
                     DefaultState.Visible = true;
                     RightSide.Visible = true;
+                    DiscordsAndServers.Visible = true; // DS14-lobby-minimize-button
                     break;
                 case LobbyGuiState.CharacterSetup:
                     CharacterSetupState.Visible = true;
@@ -50,6 +51,13 @@ namespace Content.Client.Lobby.UI
                     UserInterfaceManager.GetUIController<LobbyUIController>().ReloadCharacterSetup();
 
                     break;
+                // DS14-lobby-minimize-button-start
+                case LobbyGuiState.Minimize:
+                    DefaultState.Visible = true;
+                    RightSide.Visible = false;
+                    DiscordsAndServers.Visible = false;
+                    break;
+                // DS14-lobby-minimize-button-end
             }
         }
 
@@ -62,7 +70,11 @@ namespace Content.Client.Lobby.UI
             /// <summary>
             ///  The character setup state.
             /// </summary>
-            CharacterSetup
+            CharacterSetup,
+            /// <summary>
+            ///  The state that you see after pressing button to minimize interface
+            /// </summary>
+            Minimize // DS14-lobby-minimize-button
         }
     }
 }

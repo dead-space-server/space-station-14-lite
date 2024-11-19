@@ -179,7 +179,7 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
         return new(color.RByte, color.GByte, color.BByte);
     }
 
-    public static HumanoidCharacterAppearance EnsureValid(HumanoidCharacterAppearance appearance, string species, Sex sex)
+    public static HumanoidCharacterAppearance EnsureValid(HumanoidCharacterAppearance appearance, string species, Sex sex, string[] sponsorMarkings)
     {
         var hairStyleId = appearance.HairStyleId;
         var facialHairStyleId = appearance.FacialHairStyleId;
@@ -196,10 +196,28 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
             hairStyleId = HairStyles.DefaultHairStyle;
         }
 
+        // Corvax-Sponsors-Start
+        if (proto.TryIndex(hairStyleId, out MarkingPrototype? hairProto) &&
+            hairProto.SponsorOnly &&
+            !sponsorMarkings.Contains(hairStyleId))
+        {
+            hairStyleId = HairStyles.DefaultHairStyle;
+        }
+        // Corvax-Sponsors-End
+
         if (!markingManager.MarkingsByCategory(MarkingCategories.FacialHair).ContainsKey(facialHairStyleId))
         {
             facialHairStyleId = HairStyles.DefaultFacialHairStyle;
         }
+
+        // Corvax-Sponsors-Start
+        if (proto.TryIndex(facialHairStyleId, out MarkingPrototype? facialHairProto) &&
+            facialHairProto.SponsorOnly &&
+            !sponsorMarkings.Contains(facialHairStyleId))
+        {
+            facialHairStyleId = HairStyles.DefaultFacialHairStyle;
+        }
+        // Corvax-Sponsors-End
 
         var markingSet = new MarkingSet();
         var skinColor = appearance.SkinColor;
@@ -207,6 +225,7 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
         {
             markingSet = new MarkingSet(appearance.Markings, speciesProto.MarkingPoints, markingManager, proto);
             markingSet.EnsureValid(markingManager);
+            markingSet.FilterSponsor(sponsorMarkings, markingManager); // Corvax-Sponsors
 
             if (!Humanoid.SkinColor.VerifySkinColor(speciesProto.SkinColoration, skinColor))
             {
@@ -214,6 +233,8 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
             }
 
             markingSet.EnsureSpecies(species, skinColor, markingManager);
+            markingSet.EnsureSexes(sex, markingManager);
+            markingSet.FilterSponsor(sponsorMarkings, markingManager); // Corvax-Sponsors
             markingSet.EnsureSexes(sex, markingManager);
         }
 

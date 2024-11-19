@@ -16,6 +16,7 @@
     - Security
     - Service
     - Supply
+    - Law
   - type: ActiveRadio
     channels:
     - Binary
@@ -27,6 +28,7 @@
     - Security
     - Service
     - Supply
+    - Law
   - type: IgnoreUIRange
   - type: StationAiHeld
   - type: StationAiOverlay
@@ -70,6 +72,8 @@
     title: comms-console-announcement-title-station-ai
     color: "#2ed2fd"
   - type: ShowJobIcons
+  - type: TTS
+    voice: Glados
 
 - type: entity
   id: AiHeldIntellicard

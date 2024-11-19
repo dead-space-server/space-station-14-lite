@@ -18,6 +18,33 @@
     - Human
     - Moth
     - Reptilian
+    # DS14-species-start
+    - DemonSpecies
+    - SharkSpecies
+    - TajaranSpecies
+    - VulpkaninSpecies
+    - Felinid
+    - KoboltSpecies
+    # DS14-species-end
+
+- type: loadoutEffectGroup
+  id: NonBreather
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    # DS14-species-start
+    - XenoSponsor
+    # DS14-species-end
+
+- type: loadoutEffectGroup
+  id: RobotNonBreather
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    # DS14-species-start
+    - IPC
+    - IPS
+    # DS14-species-end
 
 - type: loadoutEffectGroup
   id: EffectSpeciesVox
@@ -44,6 +71,24 @@
   storage:
     back:
     - BoxSurvivalNitrogen
+
+- type: loadout
+  id: EmergencyNonBreather
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NonBreather
+  storage:
+    back:
+    - BoxSurvivalNonBreather
+
+- type: loadout
+  id: EmergencyRobotNonBreather
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: RobotNonBreather
+  storage:
+    back:
+    - BoxSurvivalRobotNonBreather
 
 # Clown
 - type: loadout
@@ -140,6 +185,24 @@
   storage:
     back:
     - BoxSurvivalSecurityNitrogen
+
+- type: loadout
+  id: EmergencyOxygenBrigmedic
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: OxygenBreather
+  storage:
+    back:
+    - BoxSurvivalBrigmedic
+
+- type: loadout
+  id: EmergencyNitrogenBrigmedic
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: NitrogenBreather
+  storage:
+    back:
+    - BoxSurvivalBrigmedicNitrogen
 
 # Syndicate
 - type: loadout

@@ -28,7 +28,7 @@ namespace Content.Server.StationEvents
             GameRuleStartedEvent args)
         {
             // A little starting variance so schedulers dont all proc at once.
-            component.TimeUntilNextEvent = RobustRandom.NextFloat(component.MinimumTimeUntilFirstEvent, component.MinimumTimeUntilFirstEvent + 120);
+            component.TimeUntilNextEvent = RobustRandom.NextFloat(component.MinimumTimeUntilFirstEvent, component.MinimumTimeUntilFirstEvent + 120f);
         }
 
         protected override void Ended(EntityUid uid, BasicStationEventSchedulerComponent component, GameRuleComponent gameRule,
@@ -57,8 +57,8 @@ namespace Content.Server.StationEvents
                     continue;
                 }
 
-                _event.RunRandomEvent(eventScheduler.ScheduledGameRules);
                 ResetTimer(eventScheduler);
+                _event.RunRandomEvent(eventScheduler.ScheduledGameRules);
             }
         }
 

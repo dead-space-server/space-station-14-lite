@@ -118,6 +118,9 @@
     unlitIdleState: unlit
     unlitRunningState: unlit-building
     staticRecipes:
+      - GeigerCounter
+      - EmergencyOxygenTank
+      - OxygenTank
       - Wirecutter
       - Igniter
       - Signaller
@@ -351,6 +354,10 @@
       - FauxTileAstroSnow
       - OreBagOfHolding
       - DeviceQuantumSpinInverter
+      - ClothingEyesHudDiagnostic
+      - ClothingEyesHudMedical
+      - ClothingEyesHudSecurity
+      - ClothingEyesHudAdvanced
   - type: EmagLatheRecipes
     emagDynamicRecipes:
       - BoxBeanbag
@@ -392,6 +399,11 @@
       - WeaponLaserCannon
       - WeaponLaserCarbine
       - WeaponXrayCannon
+      - JawsOfLife
+      - ClothingEyesHudDiagnostic
+      - ClothingEyesHudMedical
+      - ClothingEyesHudSecurity
+      - ClothingEyesHudAdvanced
 
 - type: entity
   id: ProtolatheHyperConvection
@@ -520,6 +532,7 @@
       - MassMediaCircuitboard
       - ReagentGrinderIndustrialMachineCircuitboard
       - JukeboxCircuitBoard
+      - SalvageExpeditionsComputerCircuitboard # Corvax-Cringe
   - type: EmagLatheRecipes
     emagDynamicRecipes:
       - ShuttleGunDusterCircuitboard
@@ -580,6 +593,13 @@
     - RightLegBorg
     - LightHeadBorg
     - TorsoBorg
+    - LeftArmBorgSec
+    - RightArmBorgSec
+    - LeftLegBorgSec
+    - RightLegBorgSec
+    - HeadBorgSec
+    - TorsoBorgSec
+    - CyborgEndoskeletonSec
     dynamicRecipes:
     - ProximitySensor
     - BorgModuleAdvancedCleaning
@@ -732,6 +752,8 @@
       - WeaponFlareGunSecurity
       - WeaponLaserCarbinePractice
       - Zipties
+      - BorgModuleArrestSecurity
+      - BorgModulEnergySecurity
     dynamicRecipes:
       - BoxBeanbag
       - BoxShotgunIncendiary
@@ -953,6 +975,10 @@
       - ClothingUniformJumpskirtChiefEngineerTurtle
       - ClothingUniformJumpsuitChaplain
       - ClothingUniformJumpskirtChaplain
+      - ClothingUniformJumpsuitBrigmedic
+      - ClothingUniformJumpskirtBrigmedic
+      - ClothingUniformJumpsuitCoroner
+      - ClothingUniformJumpskirtCoroner
       - ClothingUniformJumpsuitChef
       - ClothingUniformJumpskirtChef
       - ClothingUniformJumpsuitChemistry
@@ -1041,6 +1067,7 @@
       - ClothingOuterWinterRD
       - ClothingOuterWinterMusician
       - ClothingOuterWinterClown
+      - ClothingOuterWinterClownDownjacket
       - ClothingOuterWinterMime
       - ClothingOuterWinterCoat
       - ClothingOuterWinterJani

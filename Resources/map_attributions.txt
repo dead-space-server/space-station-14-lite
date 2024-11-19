@@ -6,9 +6,12 @@
 
 - files: ["barratry.yml"]
   authors: Emogarbage, Scribbles0
- 
+
 - files: ["box.yml"]
   authors: ACJM, Emisse
+
+- files: ["ds_box.yml"]
+  authors: Mally, Annsanla
 
 - files: ["centcomm.yml"]
   authors: Emisse

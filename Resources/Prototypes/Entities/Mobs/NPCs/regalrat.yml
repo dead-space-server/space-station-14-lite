@@ -122,6 +122,8 @@
     attributes:
       gender: male
   - type: Sharp
+  - type: TTS
+    voice: DrSezavo
 
 - type: entity
   id: MobRatKingBuff
@@ -279,6 +281,7 @@
     tags:
       - CannotSuicide
       - FootstepSound
+      - FelinidFood
   - type: NoSlip
   - type: MobPrice
     price: 500 # rat wealth

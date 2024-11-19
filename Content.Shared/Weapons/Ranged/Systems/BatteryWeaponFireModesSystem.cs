@@ -13,6 +13,7 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {
@@ -112,5 +113,12 @@ public sealed class BatteryWeaponFireModesSystem : EntitySystem
                 _popupSystem.PopupClient(Loc.GetString("gun-set-fire-mode", ("mode", prototype.Name)), uid, user.Value);
             }
         }
+
+        // DS14-start
+        if (TryComp(uid, out AppearanceComponent? appearance))
+        {
+            _appearance.QueueUpdate(uid, appearance);
+        }
+        // DS14-end
     }
 }

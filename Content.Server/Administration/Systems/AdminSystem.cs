@@ -4,6 +4,8 @@ using Content.Server.Chat.Managers;
 using Content.Server.Forensics;
 using Content.Server.GameTicking;
 using Content.Server.Hands.Systems;
+using Content.Server.Corvax.Sponsors;
+using Content.Server.GameTicking.Events;
 using Content.Server.Mind;
 using Content.Server.Players.PlayTimeTracking;
 using Content.Server.Popups;
@@ -32,6 +34,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Server.Audio;
 
 namespace Content.Server.Administration.Systems;
 
@@ -53,6 +56,7 @@ public sealed class AdminSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly SponsorsManager _sponsorManager = default!;
 
     private readonly Dictionary<NetUserId, PlayerInfo> _playerList = new();
 
@@ -255,7 +259,9 @@ public sealed class AdminSystem : EntitySystem
             overallPlaytime = playTime;
         }
 
-        return new PlayerInfo(name, entityName, identityName, startingRole, antag, GetNetEntity(session?.AttachedEntity), data.UserId,
+        var sponsor = _sponsorManager.TryGetInfo(data.UserId, out var sponsorInfo) && (sponsorInfo.HavePriorityJoin || sponsorInfo.HavePriorityAntag);
+
+        return new PlayerInfo(name, entityName, identityName, startingRole, antag, sponsor, GetNetEntity(session?.AttachedEntity), data.UserId,
             connected, _roundActivePlayers.Contains(data.UserId), overallPlaytime);
     }
 
@@ -340,7 +346,17 @@ public sealed class AdminSystem : EntitySystem
         var admins = PanicBunker.CountDeadminnedAdmins
             ? _adminManager.AllAdmins
             : _adminManager.ActiveAdmins;
-        var hasAdmins = admins.Any();
+
+        var hasAdminWithBan = false;
+
+        foreach (var admin in admins)
+        {
+            var adminData = _adminManager.GetAdminData(admin);
+            if (adminData != null && adminData.HasFlag(AdminFlags.Ban))
+            {
+                hasAdminWithBan = true;
+            }
+        }
 
         // TODO Fix order dependent Cvars
         // Please for the sake of my sanity don't make cvars & order dependent.
@@ -355,11 +371,11 @@ public sealed class AdminSystem : EntitySystem
         //
         // should have the same effect, but currently setting the disable_with_admins can modify enabled.
 
-        if (hasAdmins && PanicBunker.DisableWithAdmins)
+        if (hasAdminWithBan && PanicBunker.DisableWithAdmins)
         {
             _config.SetCVar(CCVars.PanicBunkerEnabled, false);
         }
-        else if (!hasAdmins && PanicBunker.EnableWithoutAdmins)
+        else if (!hasAdminWithBan && PanicBunker.EnableWithoutAdmins)
         {
             _config.SetCVar(CCVars.PanicBunkerEnabled, true);
         }

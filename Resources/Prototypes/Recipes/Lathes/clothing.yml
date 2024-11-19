@@ -572,6 +572,16 @@
 
 - type: latheRecipe
   parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitCoroner
+  result: ClothingUniformJumpsuitCoroner
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpskirtCoroner
+  result: ClothingUniformJumpskirtCoroner
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
   id: ClothingUniformJumpsuitWarden
   result: ClothingUniformJumpsuitWarden
 
@@ -626,6 +636,7 @@
   id: ClothingOuterWinterRD
   result: ClothingOuterWinterRD
 
+
 # Winter coats
 - type: latheRecipe
   parent: BaseCoatRecipe
@@ -636,6 +647,11 @@
   parent: BaseCoatRecipe
   id: ClothingOuterWinterClown
   result: ClothingOuterWinterClown
+
+- type: latheRecipe
+  parent: BaseCoatRecipe
+  id: ClothingOuterWinterClownDownjacket
+  result: ClothingOuterWinterClownDownjacket
 
 - type: latheRecipe
   parent: BaseCoatRecipe

@@ -46,6 +46,16 @@
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Snipers/bolt_gun_wood.rsi
+  - type: Gun
+    useKey: false
+  - type: MeleeWeapon
+    attackRate: 2
+    wideAnimationRotation: -135
+    damage:
+      types:
+        Blunt: 5
+        Slash: 8
+  - type: GunRequiresWield
 
 - type: entity
   name: Hristov
@@ -57,12 +67,30 @@
     sprite: Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
   - type: Clothing
     sprite: Objects/Weapons/Guns/Snipers/heavy_sniper.rsi
+    slots:
+    - Back
+    quickEquip: false
   - type: BallisticAmmoProvider
     whitelist:
       tags:
       - CartridgeAntiMateriel
-    capacity: 5
+    capacity: 10
     proto: CartridgeAntiMateriel
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -39
+    maxAngle: -59
+  - type: Gun
+    minAngle: 40
+    maxAngle: 60
+    fireRate: 1
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
 
 - type: entity
   name: musket

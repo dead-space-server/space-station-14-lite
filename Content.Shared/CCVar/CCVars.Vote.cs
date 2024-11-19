@@ -86,7 +86,7 @@ public sealed partial class CCVars
     ///     Allows enabling/disabling player-started votekick for ultimate authority
     /// </summary>
     public static readonly CVarDef<bool> VotekickEnabled =
-        CVarDef.Create("votekick.enabled", true, CVar.SERVERONLY);
+        CVarDef.Create("votekick.enabled", false, CVar.SERVERONLY); // DS14 value
 
     /// <summary>
     ///     Config for when the votekick should be allowed to be called based on number of eligible voters.

@@ -30,6 +30,7 @@ using Content.Shared.Tag;
 using Content.Shared.Tiles;
 using Robust.Server.GameObjects;
 using Robust.Server.Maps;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -392,7 +393,7 @@ public sealed partial class EmergencyShuttleSystem : EntitySystem
 
         var audioFile = result.ResultType == ShuttleDockResultType.NoDock
             ? "/Audio/Misc/notice1.ogg"
-            : "/Audio/Announcements/shuttle_dock.ogg";
+            : "/Audio/DeadSpace/Announcements/emergency_s_docked.ogg"; // DeadSpace-Announcements
 
         // TODO: Need filter extensions or something don't blame me.
         _audio.PlayGlobal(audioFile, Filter.Broadcast(), true);

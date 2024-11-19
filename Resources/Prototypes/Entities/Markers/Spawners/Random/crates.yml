@@ -55,6 +55,7 @@
         - CrateEmergencyInflatablewall
         - CrateHydroponicsTools
         - CrateHydroponicsSeeds
+        - CrateServicePhotocopierToners # DS14
       chance: 0.7
       rarePrototypes:
         - CrateMaterialPlasma

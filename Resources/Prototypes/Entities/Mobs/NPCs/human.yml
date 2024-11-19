@@ -30,6 +30,20 @@
         task: SimpleHumanoidHostileCompound
 
 - type: entity
+  name: salvager
+  parent: BaseMobVulpkanin
+  id: MobEvilVulpkanin
+  components:
+    - type: NpcFactionMember
+      factions:
+        - Syndicate
+    - type: InputMover
+    - type: MobMover
+    - type: HTN
+      rootTask:
+        task: SimpleHumanoidHostileCompound
+
+- type: entity
   name: spirate
   parent: BaseMobHuman
   id: MobSpirate

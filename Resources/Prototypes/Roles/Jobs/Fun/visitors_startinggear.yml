@@ -1191,23 +1191,23 @@
   inhand:
   - BriefcaseBrownFilled
 
-- type: startingGear
-  id: VisitorLawyerCentcom
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitCentcomAgent
-    shoes: ClothingShoesLeather
-    gloves: ClothingHandsGlovesLeather
-    head: BladedFlatcapBrown
-    neck: ClothingNeckLawyerbadge
-    id: VisitorLawyerPDA
-    back: ClothingBackpackSatchelLeather
-    belt: ClothingBeltStorageWaistbag
-    eyes: ClothingEyesGlassesSunglasses
-    ears: ClothingHeadsetCentCom
-    pocket1: RubberStampLawyer
-    pocket2: LuxuryPen
-  inhand:
-  - BriefcaseBrownFilled
+# - type: startingGear
+#   id: VisitorLawyerCentcom
+#   equipment:
+#     jumpsuit: ClothingUniformJumpsuitCentcomAgent
+#     shoes: ClothingShoesLeather
+#     gloves: ClothingHandsGlovesLeather
+#     head: BladedFlatcapBrown
+#     neck: ClothingNeckLawyerbadge
+#     id: VisitorLawyerPDA
+#     back: ClothingBackpackSatchelLeather
+#     belt: ClothingBeltStorageWaistbag
+#     eyes: ClothingEyesGlassesSunglasses
+#     ears: ClothingHeadsetCentCom
+#     pocket1: RubberStampLawyer
+#     pocket2: LuxuryPen
+#   inhand:
+#   - BriefcaseBrownFilled
 
 - type: startingGear
   id: VisitorLibrarian

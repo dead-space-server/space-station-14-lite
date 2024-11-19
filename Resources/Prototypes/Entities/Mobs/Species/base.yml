@@ -19,9 +19,14 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "underwearb" ] # Sirena
+    - map: [ "underweart" ] # Sirena
+    - map: [ "enum.HumanoidVisualLayers.LFoot" ]
+    - map: [ "enum.HumanoidVisualLayers.RFoot" ]
+    - map: [ "socks" ] # Sirena
     - map: ["jumpsuit"]
-    - map: ["enum.HumanoidVisualLayers.LFoot"]
-    - map: ["enum.HumanoidVisualLayers.RFoot"]
+    # - map: ["enum.HumanoidVisualLayers.LFoot"]
+    # - map: ["enum.HumanoidVisualLayers.RFoot"]
     - map: ["enum.HumanoidVisualLayers.LHand"]
     - map: ["enum.HumanoidVisualLayers.RHand"]
     - map: [ "gloves" ]
@@ -211,6 +216,9 @@
     - FootstepSound
     - DoorBumpOpener
     - AnomalyHost
+  - type: EmoteAnimation # ADT-Emotes
+  - type: EmotePanel # DS14-Emote-panel
+  - type: Falldown # DS14
 
 - type: entity
   save: false
@@ -253,9 +261,9 @@
         Heat: 1.5 #per second, scales with temperature & other constants
   - type: TemperatureSpeed
     thresholds:
-      293: 0.8
-      280: 0.6
-      260: 0.4
+      293: 0.9
+      280: 0.7
+      260: 0.5
   - type: ThermalRegulator
     metabolismHeat: 800
     radiatedHeat: 100
@@ -277,6 +285,11 @@
     damageRecovery:
       types:
         Asphyxiation: -1.0
+  - type: EmoteOnDamage # DS14: scream on damage
+    withChat: true
+    hiddenFromChatWindow: false
+    emotes:
+    - ScreamOnDamage
   - type: FireVisuals
     alternateState: Standing
 
@@ -305,9 +318,12 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-    - map: ["jumpsuit"]
+    - map: ["underwearb"] # Sirena
+    - map: ["underweart"] # Sirena
     - map: ["enum.HumanoidVisualLayers.LFoot"]
     - map: ["enum.HumanoidVisualLayers.RFoot"]
+    - map: ["socks"] # Sirena
+    - map: ["jumpsuit"]
     - map: ["enum.HumanoidVisualLayers.LHand"]
     - map: ["enum.HumanoidVisualLayers.RHand"]
     - map: ["enum.HumanoidVisualLayers.Handcuffs"]

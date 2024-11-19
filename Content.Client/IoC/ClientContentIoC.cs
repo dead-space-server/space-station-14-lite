@@ -2,6 +2,8 @@ using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
 using Content.Client.Chat.Managers;
 using Content.Client.Clickable;
+using Content.Client.Corvax.JoinQueue;
+using Content.Client.Corvax.Sponsors;
 using Content.Client.DebugMon;
 using Content.Client.Eui;
 using Content.Client.Fullscreen;
@@ -59,6 +61,8 @@ namespace Content.Client.IoC
             collection.Register<PlayerRateLimitManager>();
             collection.Register<SharedPlayerRateLimitManager, PlayerRateLimitManager>();
             collection.Register<TitleWindowManager>();
+            collection.Register<SponsorsManager>(); // Corvax-Sponsors
+            collection.Register<JoinQueueManager>(); // Corvax-Queue
         }
     }
 }

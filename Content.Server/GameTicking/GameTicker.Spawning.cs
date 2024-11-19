@@ -3,6 +3,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Server.Administration.Managers;
 using Content.Server.GameTicking.Events;
+using Content.Server.Corvax.Sponsors;
 using Content.Server.Spawners.Components;
 using Content.Server.Speech.Components;
 using Content.Server.Station.Components;
@@ -27,6 +28,7 @@ namespace Content.Server.GameTicking
     {
         [Dependency] private readonly IAdminManager _adminManager = default!;
         [Dependency] private readonly SharedJobSystem _jobs = default!;
+        [Dependency] private readonly SponsorsManager _sponsorsManager = default!;
 
         [ValidatePrototypeId<EntityPrototype>]
         public const string ObserverPrototypeName = "MobObserver";
@@ -240,6 +242,7 @@ namespace Content.Server.GameTicking
                     _chatSystem.DispatchStationAnnouncement(station,
                         Loc.GetString("latejoin-arrival-announcement-special",
                             ("character", MetaData(mob).EntityName),
+                                ("gender", character.Gender), // Corvax-LastnameGender
                             ("entity", mob),
                             ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
                         Loc.GetString("latejoin-arrival-sender"),
@@ -251,6 +254,7 @@ namespace Content.Server.GameTicking
                     _chatSystem.DispatchStationAnnouncement(station,
                         Loc.GetString("latejoin-arrival-announcement",
                             ("character", MetaData(mob).EntityName),
+                                ("gender", character.Gender), // Corvax-LastnameGender
                             ("entity", mob),
                             ("job", CultureInfo.CurrentCulture.TextInfo.ToTitleCase(jobName))),
                         Loc.GetString("latejoin-arrival-sender"),

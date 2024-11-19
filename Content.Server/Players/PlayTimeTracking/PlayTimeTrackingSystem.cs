@@ -3,6 +3,7 @@ using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.Afk;
 using Content.Server.Afk.Events;
+using Content.Server.Corvax.Sponsors;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
 using Content.Server.Mind;
@@ -39,6 +40,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly PlayTimeTrackingManager _tracking = default!;
+    [Dependency] private readonly SponsorsManager _sponsorsManager = default!;
 
     public override void Initialize()
     {
@@ -197,6 +199,18 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
 
     public bool IsAllowed(ICommonSession player, string role)
     {
+        // DS14 sponsor start
+        var info = _sponsorsManager.TryGetInfo(player.UserId, out var sponsorInfo);
+        if (info && sponsorInfo != null)
+        {
+            if (sponsorInfo.AllowJob)
+                return true;
+
+            if (_prototypes.TryIndex<JobPrototype>(role, out var jobb) && sponsorInfo.AllowedMarkings.Contains(jobb.ID))
+                return true;
+        }
+        // DS14 sponsor end
+
         if (!_prototypes.TryIndex<JobPrototype>(role, out var job) ||
             !_cfg.GetCVar(CCVars.GameRoleTimers))
             return true;
@@ -236,6 +250,15 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         if (!_cfg.GetCVar(CCVars.GameRoleTimers))
             return;
 
+        // DS14 sponsor start
+        var info = _sponsorsManager.TryGetInfo(userId, out var sponsorInfo);
+        if (info && sponsorInfo != null)
+        {
+            if (sponsorInfo.AllowJob)
+                return;
+        }
+        // DS14 sponsor end
+
         var player = _playerManager.GetSessionById(userId);
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
         {
@@ -251,6 +274,13 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
             {
                 continue;
             }
+            // DS14 sponsor start
+            if (_prototypes.TryIndex(jobs[i], out var jobb) && info && sponsorInfo != null)
+            {
+                if (sponsorInfo.AllowedMarkings.Contains(jobb.ID))
+                    continue;
+            }
+            // DS14 sponsor end
 
             jobs.RemoveSwap(i);
             i--;

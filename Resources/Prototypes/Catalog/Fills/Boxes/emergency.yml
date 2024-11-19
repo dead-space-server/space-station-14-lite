@@ -36,6 +36,32 @@
     currentLabel: reagent-name-nitrogen
 
 - type: entity
+  parent: BoxSurvival
+  id: BoxSurvivalNonBreather
+  suffix: Standard for non breathers
+  components:
+  - type: StorageFill
+    contents:
+    - id: Brutepack5
+    - id: Ointment5
+    - id: Gauze5
+    - id: Flare
+    - id: DrinkWaterBottleFull
+
+- type: entity
+  parent: BoxSurvival
+  id: BoxSurvivalRobotNonBreather
+  suffix: Standard for robot non breathers
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingHeadHatWelding
+    - id: CableApcStack5
+    - id: CrowbarRed
+    - id: Flare
+    - id: DrinkWaterBottleFull
+
+- type: entity
   parent: BoxCardboard
   id: BoxSurvivalEngineering
   name: extended-capacity survival box
@@ -250,6 +276,41 @@
     - id: EmergencyMedipen
     - id: Flare
     - id: FoodSnackNutribrick
+    # Intentionally wrong picture on the box to mimic the NT one
+  - type: Label
+    currentLabel: reagent-name-nitrogen
+
+- type: entity
+  name: survival box
+  parent: BoxSurvivalSecurity
+  id: BoxSurvivalBrigmedic
+  description: It's a box with basic internals inside.
+  suffix: Brigmedic
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingMaskBreathMedicalSecurity
+    - id: EmergencyOxygenTankFilled
+    - id: EmergencyMedipen
+    - id: Flare
+    - id: FoodSnackNutribrick
+    - id: DrinkWaterBottleFull
+
+- type: entity
+  name: survival box
+  parent: BoxSurvivalSecurity
+  id: BoxSurvivalBrigmedicNitrogen
+  description: It's a box with basic internals inside.
+  suffix: Brigmedic N2
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingMaskBreathMedicalSecurity
+    - id: EmergencyOxygenTankFilled
+    - id: EmergencyMedipen
+    - id: Flare
+    - id: FoodSnackNutribrick
+    - id: DrinkWaterBottleFull
     # Intentionally wrong picture on the box to mimic the NT one
   - type: Label
     currentLabel: reagent-name-nitrogen

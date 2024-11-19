@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingBackpack
+  id: ADTClothingBackpackSatchelninja
+  name: сумка ниндзя
+  description: Высоко технологичная сумка изготовленая из тех же материалов что и костюм ниндзи.
+  components:
+  - type: Sprite
+    sprite: ADT/Clothing/Back/ninjasatchel.rsi
+  - type: Storage
+    maxItemSize: Huge

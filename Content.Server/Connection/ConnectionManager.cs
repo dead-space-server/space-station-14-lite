@@ -3,10 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Content.Server.Chat.Managers;
+using Content.Server.Corvax.Sponsors;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.Preferences.Managers;
 using Content.Shared.CCVar;
+using Content.Shared.Corvax.CCCVars;
 using Content.Shared.GameTicking;
 using Content.Shared.Players.PlayTimeTracking;
 using Robust.Server.Player;
@@ -27,6 +29,8 @@ namespace Content.Server.Connection
     {
         void Initialize();
         void PostInit();
+
+        Task<bool> HavePrivilegedJoin(NetUserId userId); // Corvax-Queue
 
         /// <summary>
         /// Temporarily allow a user to bypass regular connection requirements.
@@ -56,6 +60,7 @@ namespace Content.Server.Connection
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly ILogManager _logManager = default!;
         [Dependency] private readonly IChatManager _chatManager = default!;
+        [Dependency] private readonly SponsorsManager _sponsorsManager = default!; // Corvax-Sponsors
 
         private ISawmill _sawmill = default!;
         private readonly Dictionary<NetUserId, TimeSpan> _temporaryBypasses = [];
@@ -206,7 +211,10 @@ namespace Content.Server.Connection
 
             var adminData = await _db.GetAdminDataForAsync(e.UserId);
 
-            if (_cfg.GetCVar(CCVars.PanicBunkerEnabled) && adminData == null)
+            // Corvax-Start: Allow privileged players bypass bunker
+            var isPrivileged = await HavePrivilegedJoin(e.UserId);
+            if (_cfg.GetCVar(CCVars.PanicBunkerEnabled) && adminData == null && !isPrivileged)
+            // Corvax-End
             {
                 var showReason = _cfg.GetCVar(CCVars.PanicBunkerShowReason);
                 var customReason = _cfg.GetCVar(CCVars.PanicBunkerCustomReason);
@@ -261,11 +269,14 @@ namespace Content.Server.Connection
                     return (ConnectionDenyReason.BabyJail, result.Reason, null);
             }
 
+            // Corvax-Queue-Start
             var wasInGame = EntitySystem.TryGet<GameTicker>(out var ticker) &&
                             ticker.PlayerGameStatuses.TryGetValue(userId, out var status) &&
                             status == PlayerGameStatus.JoinedGame;
             var adminBypass = _cfg.GetCVar(CCVars.AdminBypassMaxPlayers) && adminData != null;
-            if ((_plyMgr.PlayerCount >= _cfg.GetCVar(CCVars.SoftMaxPlayers) && !adminBypass) && !wasInGame)
+            var isQueueEnabled = _cfg.GetCVar(CCCVars.QueueEnabled);
+            if (_plyMgr.PlayerCount >= _cfg.GetCVar(CCVars.SoftMaxPlayers) && !adminBypass && !isPrivileged && !isQueueEnabled && !wasInGame)
+            // Corvax-Queue-End
             {
                 return (ConnectionDenyReason.Full, Loc.GetString("soft-player-cap-full"), null);
             }
@@ -391,5 +402,20 @@ namespace Content.Server.Connection
             await _db.AssignUserIdAsync(name, assigned);
             return assigned;
         }
+
+        // Corvax-Queue-Start
+        public async Task<bool> HavePrivilegedJoin(NetUserId userId)
+        {
+            var isAdmin = await _db.GetAdminDataForAsync(userId) != null;
+            var havePriorityJoin = _sponsorsManager.TryGetInfo(userId, out var sponsor) &&
+                sponsor.HavePriorityJoin &&
+                sponsor.ExpireDate > DateTime.Now; // Corvax-Sponsors
+            var wasInGame = EntitySystem.TryGet<GameTicker>(out var ticker) &&
+                ticker.PlayerGameStatuses.TryGetValue(userId, out var status) &&
+                status == PlayerGameStatus.JoinedGame;
+
+            return isAdmin || havePriorityJoin || wasInGame;
+        }
+        // Corvax-Queue-End
     }
 }

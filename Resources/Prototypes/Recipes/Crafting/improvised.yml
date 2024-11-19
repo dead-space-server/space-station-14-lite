@@ -227,3 +227,14 @@
   icon:
     sprite: Objects/Tools/rolling_pin.rsi
     state: icon
+
+- type: construction
+  name: бейсбольная бита с гвоздями
+  id: BaseBallBatSteel
+  graph: BaseBallBatSteel
+  startNode: start
+  targetNode: baseballbatsteel
+  category: construction-category-weapons
+  description: Прочная бейсбольная бита, но теперь с гвоздями, выглядит довольно устращающе.
+  icon: { sprite: DeadSpace/Objects/Weapons/Melee/baseball_bat_with_nails.rsi, state: icon }
+  objectType: Item

@@ -2,7 +2,17 @@
 - type: weightedRandomSpecies
   id: SpeciesWeights
   weights:
-    Human: 5
+    Human: 20
+    VulpkaninSpecies: 6
+    TajaranSpecies: 6
+    Moth: 6
     Reptilian: 4
+    KoboltSpecies: 6
     SlimePerson: 4
+    Arachnid: 4
+    SharkSpecies: 4
+    DemonSpecies: 4
+    IPS: 4
+    IPC: 4
+    Felinid: 2
     Diona: 2

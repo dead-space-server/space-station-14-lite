@@ -77,7 +77,7 @@
     animation: WeaponArcBite
     damage:
       groups:
-        Brute: 6
+        Brute: 12 # DS14
   - type: DamageStateVisuals
     rotate: true
     states:
@@ -93,15 +93,15 @@
     spawned:
     - id: FoodMeatXeno
       amount: 5
-  - type: GhostRole
-    allowMovement: true
-    allowSpeech: true
-    makeSentient: true
-    name: ghost-role-information-xeno-name
-    description: ghost-role-information-xeno-description
-    rules: ghost-role-information-rules-default-team-antagonist
-    raffle:
-      settings: default
+  # - type: GhostRole
+  #   allowMovement: true
+  #   allowSpeech: true
+  #   makeSentient: true
+  #   name: ghost-role-information-xeno-name
+  #   description: ghost-role-information-xeno-description
+  #   rules: ghost-role-information-rules-default-team-antagonist
+  #   raffle:
+  #     settings: default
   - type: GhostTakeoverAvailable
   - type: TypingIndicator
     proto: alien
@@ -175,7 +175,7 @@
   - type: MeleeWeapon
     damage:
       groups:
-        Brute: 6
+        Brute: 12 # DS14
   - type: MovementSpeedModifier
     baseSprintSpeed: 4
   - type: Fixtures
@@ -213,7 +213,7 @@
   - type: MeleeWeapon
     damage:
      groups:
-       Brute: 12
+       Brute: 18 # DS14
   - type: Fixtures
     fixtures:
       fix1:
@@ -250,7 +250,7 @@
   - type: MeleeWeapon
     damage:
      groups:
-       Brute: 10
+       Brute: 20 # DS14
   - type: SlowOnDamage
     speedModifierThresholds:
       50: 0.7
@@ -283,7 +283,7 @@
   - type: MeleeWeapon
     damage:
      groups:
-       Brute: 5
+       Brute: 10 # DS14
   - type: Fixtures
     fixtures:
       fix1:
@@ -399,7 +399,7 @@
     animation: WeaponArcBite
     damage:
       types:
-        Piercing: 5
+        Piercing: 12 # DS14
   - type: SolutionContainerManager
     solutions:
       melee:

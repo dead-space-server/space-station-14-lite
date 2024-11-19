@@ -1,10 +1,11 @@
+using Content.Shared.DeadSpace.Falldown;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.Standing
 {
     [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-    [Access(typeof(StandingStateSystem))]
+    [Access(typeof(StandingStateSystem), typeof(SharedFalldownSystem))]
     public sealed partial class StandingStateComponent : Component
     {
         [ViewVariables(VVAccess.ReadWrite)]

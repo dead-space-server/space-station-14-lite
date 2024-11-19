@@ -1,5 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Client.Lobby;
+using System.Linq;
+using Content.Client.Corvax.Sponsors;
 using Content.Shared.CCVar;
 using Content.Shared.Players;
 using Content.Shared.Players.JobWhitelist;
@@ -24,6 +26,7 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
     [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SponsorsManager _sponsorsManager = default!;
 
     private readonly Dictionary<string, TimeSpan> _roles = new();
     private readonly List<string> _roleBans = new();
@@ -107,6 +110,24 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         if (player == null)
             return true;
 
+        // DS14 sponsor start
+        var info = _sponsorsManager.TryGetInfo(out var sponsorInfo);
+        if (info && sponsorInfo != null)
+        {
+            if (sponsorInfo.AllowJob)
+                return true;
+
+            if (sponsorInfo.AllowedMarkings.Contains(job.ID))
+                return true;
+        }
+
+        if (job.SponsorOnly)
+        {
+            reason = FormattedMessage.FromUnformatted(Loc.GetString("role-sponsor-only"));
+            return false;
+        }
+        // DS14 sponsor end
+
         return CheckRoleRequirements(job, profile, out reason);
     }
 
@@ -122,6 +143,15 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
 
         if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers))
             return true;
+
+        // DS14 meteor sponsor start
+        var info = _sponsorsManager.TryGetInfo(out var sponsorInfo);
+        if (info && sponsorInfo != null)
+        {
+            if (sponsorInfo.AllowJob)
+                return true;
+        }
+        // DS14 meteor sponsor end
 
         var reasons = new List<string>();
         foreach (var requirement in requirements)

@@ -52,8 +52,8 @@
 - type: entity
   parent: [GrenadeBase, BaseSyndicateContraband]
   id: ClusterGrenade
-  name: clustergrenade
-  description: Why use one grenade when you can use three at once!
+  name: кластерная разрывная граната
+  description: Зачем взрывать одну гранату когда можно три разом!
   components:
   - type: Sprite
     sprite: Objects/Weapons/Grenades/clusterbomb.rsi

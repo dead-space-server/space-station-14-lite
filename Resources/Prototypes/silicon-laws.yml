@@ -122,6 +122,11 @@
   order: 3
   lawString: law-syndicate-3
 
+- type: siliconLaw
+  id: Syndicate4
+  order: 4
+  lawString: law-syndicate-4
+
 # Syndicate cyborg laws
 # intentionally excluded from IonStormLawsets
 - type: siliconLawset
@@ -130,6 +135,7 @@
   - Syndicate1
   - Syndicate2
   - Syndicate3
+  # - Syndicate4
   obeysTo: laws-owner-syndicate
 
 # Ninja conversion laws
@@ -519,3 +525,5 @@
     NutimovLawset: 0.5
     Drone: 0.5
     Ninja: 0.25
+    CEO: 0.25
+    Clown: 0.25
