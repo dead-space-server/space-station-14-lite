@@ -114,6 +114,8 @@ public sealed class SurgeryBui : BoundUserInterface
         foreach (var choice in state.Choices.Keys)
             if (_entities.TryGetEntity(choice, out var ent))
             {
+                if (_entities.GetComponent<MetaDataComponent>(ent.Value).EntityName == "хвост вульпканина" || _entities.GetComponent<MetaDataComponent>(ent.Value).EntityName == "хвост таяра" || _entities.GetComponent<MetaDataComponent>(ent.Value).EntityName == "хвост акулы")
+                    continue;
                 if (_entities.TryGetComponent(ent, out BodyPartComponent? part))
                     options.Add((choice, ent.Value, _entities.GetComponent<MetaDataComponent>(ent.Value).EntityName, part.PartType));
                 else if (_entities.TryGetComponent(ent, out BodyComponent? body))
