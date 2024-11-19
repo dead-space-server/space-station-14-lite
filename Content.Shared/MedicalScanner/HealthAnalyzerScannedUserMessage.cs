@@ -16,8 +16,8 @@ public sealed class HealthAnalyzerScannedUserMessage : BoundUserInterfaceMessage
     public bool? ScanMode;
     public bool? Bleeding;
     public bool? Unrevivable;
-    public Dictionary<TargetBodyPart, TargetIntegrity>? Body; // Shitmed
-    public NetEntity? Part; // Shitmed
+    public Dictionary<TargetBodyPart, TargetIntegrity>? Body; // backmen: surgery
+    public NetEntity? Part; // backmen: surgery
 
     public HealthAnalyzerScannedUserMessage(NetEntity? targetEntity, float temperature, float bloodLevel, bool? scanMode, bool? bleeding, bool? unrevivable, Dictionary<TargetBodyPart, TargetIntegrity>? body, NetEntity? part = null)
     {
@@ -27,8 +27,8 @@ public sealed class HealthAnalyzerScannedUserMessage : BoundUserInterfaceMessage
         ScanMode = scanMode;
         Bleeding = bleeding;
         Unrevivable = unrevivable;
-        Body = body; // Shitmed
-        Part = part; // Shitmed
+        Body = body; // backmen: surgery
+        Part = part; // backmen: surgery
     }
 }
 
@@ -39,3 +39,4 @@ public sealed class HealthAnalyzerPartMessage(NetEntity? owner, TargetBodyPart? 
     public readonly TargetBodyPart? BodyPart = bodyPart;
 
 }
+
