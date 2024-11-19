@@ -6,7 +6,6 @@
   showInVote: true
   description: survival-description
   rules:
-  - WageScheduler # backmen: currency
   - MeteorSwarmScheduler
   - RampingStationEventScheduler
   - SpaceTrafficControlEventScheduler
@@ -23,7 +22,6 @@
   showInVote: false # secret
   description: kessler-syndrome-description
   rules:
-  - WageScheduler # backmen: currency
   - KesslerSyndromeScheduler
   - RampingStationEventScheduler
   - SpaceTrafficControlEventScheduler
@@ -37,7 +35,6 @@
   description: all-at-once-description
   showInVote: false
   rules:
-  - WageScheduler # backmen: currency
   - Nukeops
   - Traitor
   - Revolutionary
@@ -60,7 +57,6 @@
 #   description: aller-at-once-description
 #   showInVote: false #Please god dont do this
 #   rules:
-#   - WageScheduler # backmen: currency
 #   - Nukeops
 #   - Traitor
 #   - Revolutionary
@@ -82,7 +78,6 @@
   showInVote: true
   description: extended-description
   rules:
-  - WageScheduler # backmen: currency
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
@@ -97,7 +92,6 @@
   showInVote: false #4boring4vote
   description: greenshift-description
   rules:
-  - WageScheduler # backmen: currency
   - SpaceTrafficControlFriendlyEventScheduler 
   - BasicRoundstartVariation
 
@@ -119,7 +113,6 @@
   showInVote: false #Admin Use
   description: secret-description
   rules:
-  - WageScheduler # backmen: currency
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
@@ -134,7 +127,6 @@
   showInVote: false #Admin Use
   description: secret-description
   rules:
-  - WageScheduler # backmen: currency
   - SpaceTrafficControlFriendlyEventScheduler 
   - BasicRoundstartVariation
 
@@ -158,7 +150,6 @@
   description: traitor-description
   showInVote: true
   rules:
-  - WageScheduler # backmen: currency
   - Traitor
   - SubGamemodesRule
   - BasicStationEventScheduler
@@ -185,7 +176,6 @@
   description: nukeops-description
   showInVote: true
   rules:
-  - WageScheduler # backmen: currency
   - Nukeops
   - SubGamemodesRule
   - BasicStationEventScheduler
@@ -201,7 +191,6 @@
   description: rev-description
   showInVote: true
   rules:
-  - WageScheduler # backmen: currency
   - Revolutionary
   - SubGamemodesRule
   - BasicStationEventScheduler
@@ -217,7 +206,6 @@
   description: zombie-description
   showInVote: true
   rules:
-  - WageScheduler # backmen: currency
   - Zombie
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
@@ -235,7 +223,6 @@
   description: zombieteors-description
   showInVote: false
   rules:
-  - WageScheduler # backmen: currency
   - Zombie
   - BasicStationEventScheduler
   - KesslerSyndromeScheduler
