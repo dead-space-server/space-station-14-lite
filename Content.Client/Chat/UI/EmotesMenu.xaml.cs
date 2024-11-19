@@ -32,6 +32,7 @@ public sealed partial class EmotesMenu : RadialMenu
         var main = FindControl<RadialContainer>("Main");
 
         var emotes = _prototypeManager.EnumeratePrototypes<EmotePrototype>();
+
         /* foreach (var emote in emotes)
         {
             var player = _playerManager.LocalSession?.AttachedEntity;
