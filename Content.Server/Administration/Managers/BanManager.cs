@@ -21,6 +21,11 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
+using Content.Server.Discord;
+using System.Net.Http;
+using System.Text.Json;
+using Content.Shared.DeadSpace.CCCCVars;
 
 namespace Content.Server.Administration.Managers;
 
@@ -41,6 +46,8 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
     [Dependency] private readonly UserDbDataManager _userDbData = default!;
 
     private ISawmill _sawmill = default!;
+
+    private readonly HttpClient _httpClient = new();
 
     public const string SawmillId = "admin.bans";
     public const string JobPrefix = "Job:";
@@ -186,6 +193,8 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         _sawmill.Info(logMessage);
         _chat.SendAdminAlert(logMessage);
 
+        await SendDiscordBan(targetUsername, adminName, minutes, reason, expires, null, 0xff0000, "Серверный бан", roundId); // DS14: Send to discord
+
         KickMatchingConnectedPlayers(banDef, "newly placed ban");
     }
 
@@ -261,6 +270,13 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
             null,
             role);
 
+        // DS14-Send-to-discord-start
+        var adminName = banningAdmin == null
+            ? Loc.GetString("system-user")
+            : (await _db.GetPlayerRecordByUserId(banningAdmin.Value))?.LastSeenUserName ?? Loc.GetString("system-user");
+        await SendDiscordBan(targetUsername, adminName, minutes, reason, expires, role, 0x002fff, "Бан роли", roundId);
+        // DS14-Send-to-discord-end
+
         if (!await AddRoleBan(banDef))
         {
             _chat.SendAdminAlert(Loc.GetString("cmd-roleban-existing", ("target", targetUsername ?? "null"), ("role", role)));
@@ -274,7 +290,110 @@ public sealed partial class BanManager : IBanManager, IPostInjectInit
         {
             SendRoleBans(session);
         }
+
     }
+
+    // DS14-Send-to-discord-start
+    private string GenerateBanDescription(string? target, string? adminName, uint minutes, string reason, DateTimeOffset? expires, string? job, int color, string ban_type)
+    {
+        var builder = new StringBuilder();
+
+        builder.AppendLine($"### **{ban_type}**");
+        builder.AppendLine($"**Нарушитель:** *{target}*");
+        builder.AppendLine($"**Причина:** {reason}");
+
+        builder.Append($"**Длительность:** ");
+
+        if (expires != null)
+        {
+            var banDuration = TimeSpan.FromMinutes(minutes);
+            builder.Append($"{banDuration.Days} {NumWord(banDuration.Days, "день", "дня", "дней")}, ");
+            builder.Append($"{banDuration.Hours} {NumWord(banDuration.Hours, "час", "часа", "часов")}, ");
+            builder.AppendLine($"{banDuration.Minutes} {NumWord(banDuration.Minutes, "минута", "минуты", "минут")}");
+
+        }
+        else
+        {
+            builder.AppendLine($"***Навсегда***");
+        }
+
+        if (job != null)
+        {
+            builder.AppendLine($"**Роль:** {job}");
+        }
+
+        if (expires != null)
+        {
+            builder.AppendLine($"**Дата снятия наказания:** {expires}");
+        }
+
+        builder.Append($"**Наказание выдал(-а):** ");
+
+        if (adminName != null)
+        {
+            builder.AppendLine($"*{adminName}*");
+        }
+        else
+        {
+            builder.AppendLine($"***СИСТЕМА***");
+        }
+
+        return builder.ToString();
+    }
+
+    private string NumWord(int value, params string[] words)
+    {
+        value = Math.Abs(value) % 100;
+        var num = value % 10;
+
+        if (value > 10 && value < 20)
+        {
+            return words[2];
+        }
+
+        if (value > 1 && value < 5)
+        {
+            return words[1];
+        }
+
+        if (num == 1)
+        {
+            return words[0];
+        }
+
+        return words[2];
+    }
+
+    private async Task SendDiscordBan(string? targetUsername, string? adminName, uint? minutes, string reason, DateTimeOffset? expires, string? job, int color, string ban_type, int? roundId)
+    {
+        var webhookUrl = _cfg.GetCVar(CCCCVars.DiscordBansWebhook);
+        var serverName = _cfg.GetCVar(CCVars.GameHostName);
+
+        serverName = serverName[..Math.Min(serverName.Length, 1500)];
+        if (string.IsNullOrEmpty(webhookUrl)) return;
+
+        var payload = new WebhookPayload
+        {
+            Username = serverName,
+            AvatarUrl = "",
+            Embeds = new List<WebhookEmbed>
+            {
+                new WebhookEmbed
+                {
+                    Color = color,
+                    Description = GenerateBanDescription(targetUsername, adminName, Convert.ToUInt32(minutes), reason, expires, job, color, ban_type),
+                    Footer = new WebhookEmbedFooter
+                    {
+                        Text = $"(раунд {roundId})"
+                    }
+                }
+            }
+        };
+
+        await _httpClient.PostAsync($"{webhookUrl}?wait=true",
+            new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json"));
+    }
+    // DS14-Send-to-discord-end
 
     public async Task<string> PardonRoleBan(int banId, NetUserId? unbanningAdmin, DateTimeOffset unbanTime)
     {
