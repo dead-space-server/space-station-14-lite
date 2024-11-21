@@ -268,11 +268,6 @@ internal sealed partial class ChatManager : IChatManager
         }
         // Corvax-Sponsors-End
 
-        if (player.Name == "ahahahahha")
-        {
-            wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName","[color=#66b6ff]a[/color][color=#5bbbfc]h[/color][color=#4fbff8]a[/color][color=#44c4f5]h[/color][color=#39c9f1]a[/color][color=#2dcdee]h[/color][color=#22d2ea]a[/color][color=#17d7e7]h[/color][color=#0bdbe3]h[/color][color=#00e0e0]a[/color]"), ("message", FormattedMessage.EscapeText(message)));
-        }
-
         //TODO: player.Name color, this will need to change the structure of the MsgChatMessage
         ChatMessageToAll(ChatChannel.OOC, message, wrappedMessage, EntityUid.Invalid, hideChat: false, recordReplay: true, colorOverride: colorOverride, author: player.UserId);
         _mommiLink.SendOOCMessage(player.Name, message.Replace("@", "\\@").Replace("<", "\\<").Replace("/", "\\/")); // @ and < are both problematic for discord due to pinging. / is sanitized solely to kneecap links to murder embeds via blunt force
