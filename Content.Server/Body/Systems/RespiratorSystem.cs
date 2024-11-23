@@ -93,17 +93,6 @@ public sealed class RespiratorSystem : EntitySystem
                 }
             }
 
-            // start-backmen: blob zombie
-            if (respirator.HasImmunity)
-            {
-                if (respirator.SuffocationCycles > 0)
-                {
-                    StopSuffocation((uid, respirator));
-                    respirator.SuffocationCycles = 0;
-                }
-                continue;
-            }
-            // end-backmen: blob zombie
             if (respirator.Saturation < respirator.SuffocationThreshold)
             {
                 if (_gameTiming.CurTime >= respirator.LastGaspEmoteTime + respirator.GaspEmoteCooldown)
