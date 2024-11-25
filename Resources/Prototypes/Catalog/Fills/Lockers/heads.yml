@@ -349,6 +349,8 @@
     - id: WeaponPistolX01 # DS14
     - id: PistolDominator # DS14
     - id: ClothingNeckBodyCamera # DS14
+    - id: EftposSecurity # backmen-economy
+    - id: PortableCameraMonitor # DS14
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
