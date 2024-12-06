@@ -4,6 +4,8 @@
     - survival
   name: survival-title
   showInVote: true
+  showInAdminVote: true # DS14
+  voteType: rdm # DS14
   description: survival-description
   rules:
   - MeteorSwarmScheduler
@@ -20,6 +22,8 @@
     - meteorhell
   name: kessler-syndrome-title
   showInVote: false # secret
+  showInAdminVote: true # DS14
+  voteType: admin # DS14
   description: kessler-syndrome-description
   rules:
   - KesslerSyndromeScheduler
@@ -34,6 +38,8 @@
   name: all-at-once-title
   description: all-at-once-description
   showInVote: false
+  showInAdminVote: true # DS14
+  voteType: rdm # DS14
   rules:
   - Nukeops
   - Traitor
@@ -76,6 +82,8 @@
     - extended
   name: extended-title
   showInVote: true
+  showInAdminVote: true # DS14
+  voteType: calm # DS14
   description: extended-description
   rules:
   - BasicStationEventScheduler
@@ -90,6 +98,8 @@
   - greenshift
   name: greenshift-title
   showInVote: false #4boring4vote
+  showInAdminVote: true # DS14
+  voteType: admin # DS14
   description: greenshift-description
   rules:
   - SpaceTrafficControlFriendlyEventScheduler 
@@ -111,6 +121,8 @@
     - secretextended
   name: secret-title
   showInVote: false #Admin Use
+  showInAdminVote: false # DS14
+  voteType: admin # DS14
   description: secret-description
   rules:
   - BasicStationEventScheduler
@@ -125,6 +137,8 @@
   - secretgreenshift
   name: secret-title
   showInVote: false #Admin Use
+  showInAdminVote: false # DS14
+  voteType: admin # DS14
   description: secret-description
   rules:
   - SpaceTrafficControlFriendlyEventScheduler 
@@ -137,6 +151,8 @@
   name: sandbox-title
   description: sandbox-description
   showInVote: false # Not suitable for use without admin intervention, since entity spamming can quickly crash a server
+  showInAdminVote: false # DS14
+  voteType: admin # DS14
   maxPlayers: 5
   rules:
     - Sandbox
@@ -149,6 +165,8 @@
   name: traitor-title
   description: traitor-description
   showInVote: true
+  showInAdminVote: true # DS14
+  voteType: calm # DS14
   rules:
   - Traitor
   - SubGamemodesRule
@@ -164,6 +182,8 @@
   name: death-match-title
   description: death-match-description
   showInVote: true
+  showInAdminVote: true # DS14
+  voteType: admin # DS14
   supportedMaps: DeathMatchMapPool
   rules:
     - DeathMatch31
@@ -175,6 +195,8 @@
   name: nukeops-title
   description: nukeops-description
   showInVote: true
+  showInAdminVote: true # DS14
+  voteType: rdm # DS14
   rules:
   - Nukeops
   - SubGamemodesRule
@@ -190,6 +212,8 @@
   name: rev-title
   description: rev-description
   showInVote: true
+  showInAdminVote: true # DS14
+  voteType: rdm # DS14
   rules:
   - Revolutionary
   - SubGamemodesRule
@@ -205,6 +229,8 @@
   name: zombie-title
   description: zombie-description
   showInVote: true
+  showInAdminVote: true # DS14
+  voteType: rdm # DS14
   rules:
   - Zombie
   - BasicStationEventScheduler
@@ -222,6 +248,8 @@
   name: zombieteors-title
   description: zombieteors-description
   showInVote: false
+  showInAdminVote: true # DS14
+  voteType: admin # DS14
   rules:
   - Zombie
   - BasicStationEventScheduler
