@@ -76,6 +76,7 @@
       - id: PistolDominator # DS14
       - id: WeaponPistolMk58 # DS14
       - id: ClothingNeckBodyCamera # DS14-disabled
+      - id: ClothingMaskGasSecurity # DS14
 
 - type: entity
   id: LockerBrigmedicFilled
