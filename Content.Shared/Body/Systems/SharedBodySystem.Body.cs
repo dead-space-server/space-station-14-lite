@@ -15,6 +15,9 @@ using Content.Shared.Gibbing.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Events;
 using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
+using Content.Shared.Rejuvenate;
+using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Standing;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -22,6 +25,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Utility;
 using Robust.Shared.Timing;
+
 namespace Content.Shared.Body.Systems;
 
 public partial class SharedBodySystem
@@ -52,6 +56,7 @@ public partial class SharedBodySystem
         SubscribeLocalEvent<BodyComponent, CanDragEvent>(OnBodyCanDrag);
         SubscribeLocalEvent<BodyComponent, StandAttemptEvent>(OnStandAttempt);
         SubscribeLocalEvent<BodyComponent, ProfileLoadFinishedEvent>(OnProfileLoadFinished);
+        SubscribeLocalEvent<BodyComponent, IsEquippingAttemptEvent>(OnBeingEquippedAttempt);
     }
 
     private void OnBodyInserted(Entity<BodyComponent> ent, ref EntInsertedIntoContainerMessage args)
@@ -125,7 +130,6 @@ public partial class SharedBodySystem
         var rootPartUid = SpawnInContainerOrDrop(protoRoot.Part, bodyEntity, BodyRootContainerId);
         var rootPart = Comp<BodyPartComponent>(rootPartUid);
         rootPart.Body = bodyEntity;
-        rootPart.OriginalBody = bodyEntity;
         Dirty(rootPartUid, rootPart);
         // Setup the rest of the body entities.
         SetupOrgans((rootPartUid, rootPart), protoRoot.Organs);
@@ -185,7 +189,6 @@ public partial class SharedBodySystem
                 var childPartComponent = Comp<BodyPartComponent>(childPart);
                 var partSlot = CreatePartSlot(parentEntity, connection, childPartComponent.PartType, parentPartComponent);
                 childPartComponent.ParentSlot = partSlot;
-                childPartComponent.OriginalBody = rootPart.Body;
                 Dirty(childPart, childPartComponent);
                 var cont = Containers.GetContainer(parentEntity, GetPartSlotContainerId(connection));
 
@@ -392,8 +395,7 @@ public partial class SharedBodySystem
             if (IsPartRoot(bodyEnt, partId, part: part) || !part.CanSever)
                 return gibs;
 
-            ChangeSlotState((partId, part), true);
-
+            DropSlotContents((partId, part));
             RemovePartChildren((partId, part), bodyEnt);
             foreach (var organ in GetPartOrgans(partId, part))
             {
@@ -431,7 +433,7 @@ public partial class SharedBodySystem
             if (IsPartRoot(bodyEnt, partId, part: part))
                 return false;
 
-            ChangeSlotState((partId, part), true);
+            DropSlotContents((partId, part));
             RemovePartChildren((partId, part), bodyEnt);
             QueueDel(partId);
             return true;
@@ -449,4 +451,21 @@ public partial class SharedBodySystem
         foreach (var part in GetBodyChildren(uid, component))
             EnsureComp<BodyPartAppearanceComponent>(part.Id);
     }
+
+    private void OnBeingEquippedAttempt(Entity<BodyComponent> ent, ref IsEquippingAttemptEvent args)
+    {
+        TryGetPartFromSlotContainer(args.Slot, out var bodyPart);
+        if (bodyPart is not null)
+        {
+            if (!GetBodyChildrenOfType(args.EquipTarget, bodyPart.Value).Any())
+            {
+                if (_timing.IsFirstTimePredicted)
+                    _popup.PopupEntity(Loc.GetString("equip-part-missing-error",
+                        ("target", args.EquipTarget), ("part", bodyPart.Value.ToString())), args.Equipee, args.Equipee);
+                args.Cancel();
+            }
+        }
+    }
+
+    // Shitmed Change End
 }
