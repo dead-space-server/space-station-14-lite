@@ -2,133 +2,269 @@
 # TODO BODY: Part damage
 - type: entity
   id: PartVulpkanin
-  parent: [BaseItem, BasePart]
+  parent: BaseItem
   name: "vulpkanin body part"
   abstract: true
   components:
-  - type: Extractable
-    juiceSolution:
-      reagents:
-      - ReagentId: Fat
-        Quantity: 3
-      - ReagentId: Blood
-        Quantity: 10
+  - type: Damageable
+    damageContainer: OrganicPart # Shitmed Change
+  - type: BodyPart
+  - type: ContainerContainer
+    containers:
+      bodypart: !type:Container
+        ents: []
+  - type: StaticPrice #DynamicPrice
+    price: 100
+  - type: Tag
+    tags:
+      - Trash
+  # Shitmed Change Start
+  - type: Gibbable
+  - type: SurgeryTool
+    startSound:
+      path: /Audio/_Shitmed/Medical/Surgery/organ1.ogg
+    endSound:
+      path: /Audio/_Shitmed/Medical/Surgery/organ2.ogg
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 110
+      behaviors:
+      - !type:GibPartBehavior { }
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Slash
+        damage: 150
+      behaviors:
+      - !type:GibPartBehavior { }
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 200
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawnInContainer: true
+        spawn:
+          Ash:
+            min: 1
+            max: 1
+      - !type:BurnBodyBehavior { }
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MeatLaserImpact
+    # Shitmed Change End
 
 - type: entity
   id: TorsoVulpkanin
-  name: "тело вульпканина"
-  parent: [PartVulpkanin, BaseTorso]
+  name: "vulpkanin torso"
+  parent: PartVulpkanin
   components:
   - type: Sprite
+    netsync: false
     sprite: Mobs/Species/Vulpkanin/parts.rsi
     state: "torso_m"
-  - type: Extractable
-    juiceSolution:
-      reagents:
-      - ReagentId: Fat
-        Quantity: 10
-      - ReagentId: Blood
-        Quantity: 20
+  - type: Icon
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "torso_m"
+  # Shitmed Change Start
+  - type: BodyPart
+    partType: Torso
+    toolName: "a torso"
+    containerName: "torso_slot"
+  - type: ContainerContainer
+    containers:
+      torso_slot: !type:ContainerSlot {}
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 400
+      behaviors:
+      - !type:GibPartBehavior { }
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Slash
+        damage: 400
+      behaviors:
+      - !type:GibPartBehavior { }
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 400
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawnInContainer: true
+        spawn:
+          Ash:
+            min: 1
+            max: 1
+      - !type:BurnBodyBehavior { }
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MeatLaserImpact
+  # Shitmed Change End
 
 - type: entity
   id: HeadVulpkanin
-  name: "голова вульпканина"
-  parent: [PartVulpkanin, BaseHead]
+  name: "vulpkanin head"
+  parent: PartVulpkanin
   components:
   - type: Sprite
+    netsync: false
     sprite: Mobs/Species/Vulpkanin/parts.rsi
     state: "head_m"
-  - type: Extractable
-    juiceSolution:
-      reagents:
-      - ReagentId: Fat
-        Quantity: 5
-      - ReagentId: Blood
-        Quantity: 10
+  - type: Icon
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "head_m"
+  - type: BodyPart
+    partType: Head
+    vital: true
+    toolName: "a head" # Shitmed Change
+  - type: Input
+    context: "ghost"
+  - type: InputMover
+  - type: GhostOnMove
+  - type: Tag
+    tags:
+      - Head
 
 - type: entity
   id: LeftArmVulpkanin
-  name: "левая рука вульпканина"
-  parent: [PartVulpkanin, BaseLeftArm]
+  name: "left vulpkanin arm"
+  parent: PartVulpkanin
   components:
-    - type: Sprite
-      sprite: Mobs/Species/Vulpkanin/parts.rsi
-      state: "l_arm"
+  - type: Sprite
+    netsync: false
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "l_arm"
+  - type: Icon
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "l_arm"
+  - type: BodyPart
+    partType: Arm
+    symmetry: Left
+    toolName: "a left arm" # Shitmed Change
 
 - type: entity
   id: RightArmVulpkanin
-  name: "правая рука вульпканина"
-  parent: [PartVulpkanin, BaseRightArm]
+  name: "right vulpkanin arm"
+  parent: PartVulpkanin
   components:
-    - type: Sprite
-      sprite: Mobs/Species/Vulpkanin/parts.rsi
-      state: "r_arm"
+  - type: Sprite
+    netsync: false
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "r_arm"
+  - type: Icon
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "r_arm"
+  - type: BodyPart
+    partType: Arm
+    symmetry: Right
+    toolName: "a right arm" # Shitmed Change
 
 - type: entity
   id: LeftHandVulpkanin
-  name: "левая кисть вульпканина"
-  parent: [PartVulpkanin, BaseLeftHand]
+  name: "left vulpkanin hand"
+  parent: PartVulpkanin
   components:
-    - type: Sprite
-      sprite: Mobs/Species/Vulpkanin/parts.rsi
-      state: "l_hand"
+  - type: Sprite
+    netsync: false
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "l_hand"
+  - type: Icon
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "l_hand"
+  - type: BodyPart
+    partType: Hand
+    symmetry: Left
+    toolName: "a left hand" # Shitmed Change
 
 - type: entity
   id: RightHandVulpkanin
-  name: "правая кисть вульпканина"
-  parent: [PartVulpkanin, BaseRightHand]
+  name: "right vulpkanin hand"
+  parent: PartVulpkanin
   components:
-    - type: Sprite
-      sprite: Mobs/Species/Vulpkanin/parts.rsi
-      state: "r_hand"
-
-- type: entity
-  id: TailVulpkanin
-  name: "хвост вульпканина"
-  parent: [PartVulpkanin, BaseTail]
-  components:
-    - type: Sprite
-      sprite: Mobs/Species/Vulpkanin/parts.rsi
-      state: "tail_m"
+  - type: Sprite
+    netsync: false
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "r_hand"
+  - type: Icon
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "r_hand"
+  - type: BodyPart
+    partType: Hand
+    symmetry: Right
+    toolName: "a right hand" # Shitmed Change
 
 - type: entity
   id: LeftLegVulpkanin
-  name: "левая нога вульпканина"
-  parent: [PartVulpkanin, BaseLeftLeg]
+  name: "left vulpkanin leg"
+  parent: PartVulpkanin
   components:
-    - type: Sprite
-      sprite: Mobs/Species/Vulpkanin/parts.rsi
-      state: "l_leg"
-    - type: MovementBodyPart
-      walkSpeed: 2.7
-      sprintSpeed: 4.6
+  - type: Sprite
+    netsync: false
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "l_leg"
+  - type: Icon
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "l_leg"
+  - type: BodyPart
+    partType: Leg
+    symmetry: Left
+    toolName: "a left leg" # Shitmed Change
+  - type: MovementBodyPart
 
 - type: entity
   id: RightLegVulpkanin
-  name: "правая нога вульпканина"
-  parent: [PartVulpkanin, BaseRightLeg]
+  name: "right vulpkanin leg"
+  parent: PartVulpkanin
   components:
-    - type: Sprite
-      sprite: Mobs/Species/Vulpkanin/parts.rsi
-      state: "r_leg"
-    - type: MovementBodyPart
-      walkSpeed: 2.7
-      sprintSpeed: 4.6
+  - type: Sprite
+    netsync: false
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "r_leg"
+  - type: Icon
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "r_leg"
+  - type: BodyPart
+    partType: Leg
+    symmetry: Right
+    toolName: "a right leg" # Shitmed Change
+  - type: MovementBodyPart
 
 - type: entity
   id: LeftFootVulpkanin
-  name: "левая ступня вульпканина"
-  parent: [PartVulpkanin, BaseLeftFoot]
+  name: "left vulpkanin foot"
+  parent: PartVulpkanin
   components:
-    - type: Sprite
-      sprite: Mobs/Species/Vulpkanin/parts.rsi
-      state: "l_foot"
+  - type: Sprite
+    netsync: false
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "l_foot"
+  - type: Icon
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "l_foot"
+  - type: BodyPart
+    partType: Foot
+    symmetry: Left
+    toolName: "a left foot" # Shitmed Change
 
 - type: entity
   id: RightFootVulpkanin
-  name: "правая ступня вульпканина"
-  parent: [PartVulpkanin, BaseRightFoot]
+  name: "right vulpkanin foot"
+  parent: PartVulpkanin
   components:
-    - type: Sprite
-      sprite: Mobs/Species/Vulpkanin/parts.rsi
-      state: "r_foot"
+  - type: Sprite
+    netsync: false
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "r_foot"
+  - type: Icon
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: "r_foot"
+  - type: BodyPart
+    partType: Foot
+    symmetry: Right
+    toolName: "a right foot" # Shitmed Change

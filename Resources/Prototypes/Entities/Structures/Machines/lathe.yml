@@ -358,6 +358,10 @@
       - ClothingEyesHudMedical
       - ClothingEyesHudSecurity
       - ClothingEyesHudAdvanced
+  # end-backmen: languages
+      - EnergyScalpel # Shitmed Change
+      - EnergyCautery # Shitmed Change
+      - AdvancedRetractor # Shitmed Change
   - type: EmagLatheRecipes
     emagDynamicRecipes:
       - BoxBeanbag
@@ -611,6 +615,7 @@
     - BorgModuleHarvesting
     - BorgModuleDefibrillator
     - BorgModuleAdvancedTreatment
+    - BorgModuleSurgery # Shitmed Change
     - RipleyHarness
     - RipleyLArm
     - RipleyRArm
@@ -630,6 +635,13 @@
     - HamtrLLeg
     - HamtrRLeg
     - VimHarness
+    # Shitmed Change
+    - BorgModuleAdvancedSurgery
+    - JawsOfLifeLeftArm
+    - JawsOfLifeRightArm
+    - SpeedLeftLeg
+    - SpeedRightLeg
+    - BasicCyberneticEyes
   - type: MaterialStorage
     whitelist:
       tags:
@@ -805,6 +817,8 @@
       - WeaponLaserCannon
       - WeaponLaserCarbine
       - WeaponXrayCannon
+      - SecurityCyberneticEyes # Shitmed Change
+      - MedicalCyberneticEyes # Shitmed Change
   - type: MaterialStorage
     whitelist:
       tags:
@@ -930,6 +944,7 @@
       - BluespaceBeaker
       - SyringeBluespace
       - SyringeCryostasis
+      - BluespacePillCanister # backmen
   - type: Machine
     board: MedicalTechFabCircuitboard
   - type: StealTarget

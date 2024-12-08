@@ -72,6 +72,9 @@
   components:
   - type: BorgSwitchableType
     selectedBorgType: medical
+  - type: SurgeryTarget
+  - type: TTS
+    voice: TrainingRobot
 
 - type: entity
   id: BorgChassisService

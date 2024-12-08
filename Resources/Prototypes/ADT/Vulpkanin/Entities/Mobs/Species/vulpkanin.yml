@@ -12,7 +12,7 @@
     - HeadSide
     - Tail
   - type: Body
-    prototype: VulpkaninBody
+    prototype: Vulpkanin
     requiredLegs: 2
   - type: Hunger
   - type: Thirst
