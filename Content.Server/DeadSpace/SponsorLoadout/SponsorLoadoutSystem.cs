@@ -1,6 +1,6 @@
 using System.Linq;
 using Content.Server.Corvax.Sponsors;
-using Content.Server.GameTicking;
+using Content.Shared.GameTicking;
 using Content.Server.Hands.Systems;
 using Content.Shared.DeadSpace.SponsorLoadout;
 using Robust.Shared.Prototypes;
