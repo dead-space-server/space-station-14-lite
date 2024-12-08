@@ -4,8 +4,6 @@
   name: space animal lungs
   components:
   - type: Organ
-    onAdd:
-    - type: RespiratorImmunity
 
 - type: entity
   parent: OrganAnimalHeart
