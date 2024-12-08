@@ -661,3 +661,12 @@ ATM: null
 AutopsyTable: OperatingTable
 BackmenRandomVending: RandomVending
 ZetaOneMedipen: null
+
+# 2024-11-17
+PresentRandomAsh: PresentRandomCoal
+
+# 2024-11-19
+CrateCrewMonitoringBoards: CrateCrewMonitoring
+
+# 2024-11-25
+CrateSlimepersonLifeSupport: CrateNitrogenInternals

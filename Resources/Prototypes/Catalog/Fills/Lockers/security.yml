@@ -10,7 +10,6 @@
       - id: ClothingBeltSecurityFilled
       - id: Flash
       - id: ClothingEyesGlassesSecurity
-      # - id: ClothingHeadsetAltSecurity # DS14-disabled
       - id: ClothingHandsGlovesCombat
       # - id: ClothingShoesBootsJack # DS14-disabled
       # - id: ClothingOuterCoatWarden # DS14-disabled
@@ -41,7 +40,6 @@
       - id: ClothingBeltSecurityFilled
       - id: Flash
       - id: ClothingEyesGlassesSecurity
-      # - id: ClothingHeadsetAltSecurity # DS14-disabled
       - id: ClothingHandsGlovesCombat
       # - id: ClothingShoesBootsJack # DS14-disabled
       # - id: ClothingOuterCoatWarden # DS14-disabled
