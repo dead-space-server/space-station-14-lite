@@ -611,6 +611,14 @@ ADTGunRifleAN: null
 ADTClothingHeadHatOktyabrinaOrientalEars: null
 ADTClothingUniformAJohanPants: null
 
+# 2024-10-20 - DS14
+PlushieGSB: PlushieLizard
+PlushieInstructor: PlushieLizard
+PlushieOfficer: PlushieLizard
+PlushieLera: PlushieLizard
+PlushieKel: PlushieLizard
+PlushieCap: PlushieLizard
+
 # 2024-10-13 - DS14-Lite
 HandheldAutopsyScannerUnpowered: null
 HandheldAutopsyScanner: null
@@ -661,3 +669,12 @@ ATM: null
 AutopsyTable: OperatingTable
 BackmenRandomVending: RandomVending
 ZetaOneMedipen: null
+
+# 2024-11-17
+PresentRandomAsh: PresentRandomCoal
+
+# 2024-11-19
+CrateCrewMonitoringBoards: CrateCrewMonitoring
+
+# 2024-11-25
+CrateSlimepersonLifeSupport: CrateNitrogenInternals

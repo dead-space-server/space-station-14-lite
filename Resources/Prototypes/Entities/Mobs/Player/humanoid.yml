@@ -4,6 +4,12 @@
 
 - type: randomHumanoidSettings
   id: EventHumanoid
+  # start-backmen: species
+  speciesBlacklist:
+  - Monkey
+  - Kobold
+  - ArachneClassic
+  # end-backmen: species
   components:
     - type: RandomHumanoidAppearance
       randomizeName: false
@@ -67,11 +73,11 @@
   speciesBlacklist:
     # - Arachnid
     - Diona
-    # - Dwarf
+    - Dwarf
     # - Human
     # - Moth
     # - Reptilian
-    # - SlimePerson
+    - SlimePerson
     - Vox
     # - DemonSpecies
     # - SharkSpecies

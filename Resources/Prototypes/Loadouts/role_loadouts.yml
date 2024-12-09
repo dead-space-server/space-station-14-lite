@@ -28,9 +28,9 @@
   - HoPUnderwear # DS14-Underwear
 
 # Silicons
-# - type: roleLoadout
-#   id: JobStationAi
-#   nameDataset: names_ai
+- type: roleLoadout
+  id: JobStationAi
+  nameDataset: NamesAI
 
 # Civilian
 - type: roleLoadout
@@ -241,6 +241,7 @@
   id: JobSalvageSpecialist
   groups:
   - GroupTankHarness
+  - SalvageSpecialistJumpsuit
   - SalvageSpecialistBackpack
   - SalvageSpecialistOuterClothing
   - SalvageSpecialistShoes

@@ -139,6 +139,7 @@
     - id: WeaponDisabler
     - id: ClothingEyesHudCommand
     - id: BoxPhotocopierToners # DS14
+    - id: PetBowlWater # DS14
 
 - type: entity
   id: LockerHeadOfPersonnelFilled
@@ -349,6 +350,8 @@
     - id: WeaponPistolX01 # DS14
     - id: PistolDominator # DS14
     - id: ClothingNeckBodyCamera # DS14
+    - id: PortableCameraMonitor # DS14
+    - id: PetBowlWater # DS14
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable

@@ -1,3 +1,9 @@
+﻿- type: damageContainer
+  id: Blob
+  supportedGroups:
+  - Brute
+  - Burn
+
 - type: damageContainer
   id: OrganicPart # backmen: surgery
   supportedGroups:

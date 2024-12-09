@@ -2,7 +2,7 @@ using Content.Server.Administration;
 using Robust.Shared.Player;
 using Content.Shared.Preferences;
 using Content.Server.Chat.Managers;
-using Content.Server.GameTicking;
+using Content.Shared.GameTicking;
 
 namespace Content.Server.DeadSpace.CustomNameOnSpawn;
 

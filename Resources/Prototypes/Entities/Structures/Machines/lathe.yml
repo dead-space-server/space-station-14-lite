@@ -314,6 +314,7 @@
       - WeaponSprayNozzle
       - ClothingBackpackWaterTank
       - MegaSprayBottle
+      - BagOfSummoningGarbage # DS14
       - TimerTrigger
       - ChemicalPayload
       - FlashPayload
@@ -358,6 +359,10 @@
       - ClothingEyesHudMedical
       - ClothingEyesHudSecurity
       - ClothingEyesHudAdvanced
+  # end-backmen: languages
+      - EnergyScalpel # Shitmed Change
+      - EnergyCautery # Shitmed Change
+      - AdvancedRetractor # Shitmed Change
   - type: EmagLatheRecipes
     emagDynamicRecipes:
       - BoxBeanbag
@@ -611,6 +616,7 @@
     - BorgModuleHarvesting
     - BorgModuleDefibrillator
     - BorgModuleAdvancedTreatment
+    - BorgModuleSurgery # Shitmed Change
     - RipleyHarness
     - RipleyLArm
     - RipleyRArm
@@ -630,6 +636,13 @@
     - HamtrLLeg
     - HamtrRLeg
     - VimHarness
+    # Shitmed Change
+    - BorgModuleAdvancedSurgery
+    - JawsOfLifeLeftArm
+    - JawsOfLifeRightArm
+    - SpeedLeftLeg
+    - SpeedRightLeg
+    - BasicCyberneticEyes
   - type: MaterialStorage
     whitelist:
       tags:
@@ -805,6 +818,8 @@
       - WeaponLaserCannon
       - WeaponLaserCarbine
       - WeaponXrayCannon
+      - SecurityCyberneticEyes # Shitmed Change
+      - MedicalCyberneticEyes # Shitmed Change
   - type: MaterialStorage
     whitelist:
       tags:
@@ -930,6 +945,7 @@
       - BluespaceBeaker
       - SyringeBluespace
       - SyringeCryostasis
+      - BluespacePillCanister # backmen
   - type: Machine
     board: MedicalTechFabCircuitboard
   - type: StealTarget
@@ -968,7 +984,17 @@
       - ClothingUniformJumpskirtCapFormalDress
       - ClothingUniformJumpsuitCargo
       - ClothingUniformJumpskirtCargo
+      # DS14-start
+      - ClothingUniformJumpsuitCargoAlt
+      - ClothingUniformJumpsuitCargoFormal
+      - ClothingUniformJumpskirtCargoFormal
+      # DS14-end
       - ClothingUniformJumpsuitSalvageSpecialist
+      # DS14-start
+      - ClothingUniformJumpsuitSalvageFormal
+      - ClothingUniformJumpskirtCargoSalvage
+      - ClothingUniformJumpskirtCargoSalvageFormal
+      # DS14-end
       - ClothingHeadHatBeretEngineering
       - ClothingUniformJumpsuitChiefEngineer
       - ClothingUniformJumpskirtChiefEngineer
@@ -978,8 +1004,10 @@
       - ClothingUniformJumpskirtChaplain
       - ClothingUniformJumpsuitBrigmedic
       - ClothingUniformJumpskirtBrigmedic
+      # DS14-start
       - ClothingUniformJumpsuitCoroner
       - ClothingUniformJumpskirtCoroner
+      # DS14-end
       - ClothingUniformJumpsuitChef
       - ClothingUniformJumpskirtChef
       - ClothingUniformJumpsuitChemistry
@@ -1025,6 +1053,8 @@
       - ClothingUniformJumpskirtSeniorPhysician
       - ClothingUniformJumpsuitMime
       - ClothingUniformJumpskirtMime
+      - ClothingUniformJumpsuitMimeSexyWhite
+      - ClothingUniformJumpsuitMimeSexyBlack
       - ClothingUniformJumpsuitMusician
       - ClothingUniformJumpsuitParamedic
       - ClothingUniformJumpskirtParamedic

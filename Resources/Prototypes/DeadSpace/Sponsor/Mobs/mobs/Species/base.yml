@@ -135,6 +135,7 @@
       groups:
         Airloss: -0.5
   - type: ZombieImmune
+  - type: LizardAccent
 
 - type: damageModifierSet
   id: XenoRace

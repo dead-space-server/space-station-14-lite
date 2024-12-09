@@ -1,5 +1,0 @@
-﻿- type: damageContainer
-  id: Blob
-  supportedGroups:
-  - Brute
-  - Burn
