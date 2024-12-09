@@ -120,30 +120,6 @@ public sealed partial class TTSSystem : EntitySystem
         HandleDirectSay(args.Target, args.Message, protoVoice.Speaker);
     }
 
-    private async void OnRadioSpokeEvent(RadioSpokeEvent args)
-    {
-        if (!_isEnabled ||
-            args.Message.Length > MaxMessageChars)
-            return;
-
-        if (!TryComp(args.Source, out TTSComponent? component))
-            return;
-
-        var voiceId = component.VoicePrototypeId;
-
-        if (voiceId == null)
-            return;
-
-        var voiceEv = new TransformSpeakerVoiceEvent(args.Source, voiceId);
-        RaiseLocalEvent(args.Source, voiceEv);
-        voiceId = voiceEv.VoiceId;
-
-        if (!_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var protoVoice))
-            return;
-
-        HandleRadio(args.Receivers, args.Message, protoVoice.Speaker);
-    }
-
     private async void OnAnnounceSpokeEvent(AnnounceSpokeEvent args)
     {
         var voiceId = args.Voice;
@@ -177,15 +153,6 @@ public sealed partial class TTSSystem : EntitySystem
         var soundData = await GenerateTTS(message, speaker);
         if (soundData is null) return;
         RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid)), uid);
-    }
-
-    private async void HandleRadio(EntityUid[] uids, string message, string speaker)
-    {
-        var soundData = await GenerateTTS(message, speaker);
-        if (soundData is null) return;
-
-        foreach (var uid in uids)
-            RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid), isRadio: true), Filter.Entities(uid));
     }
 
     private async void HandleAnnounce(string message, string speaker)

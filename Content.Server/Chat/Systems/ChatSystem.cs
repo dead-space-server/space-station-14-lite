@@ -1019,27 +1019,6 @@ public sealed class EntitySpokeToEntityEvent : EntityEventArgs
 }
 
 /// <summary>
-///     Raised on an entity after <see cref="EntitySpokeEvent"/> when it speaks using radio.
-/// </summary>
-public sealed class RadioSpokeEvent : EntityEventArgs
-{
-    public readonly EntityUid Source;
-    public readonly string Message;
-
-    /// <summary>
-    ///     Of course, we can just use <see cref="EntitySpokeEvent"/>, but it's easier to send a message using RadioSystem
-    /// </summary>
-    public readonly EntityUid[] Receivers;
-
-    public RadioSpokeEvent(EntityUid source, string message, EntityUid[] receivers)
-    {
-        Source = source;
-        Message = message;
-        Receivers = receivers;
-    }
-}
-
-/// <summary>
 ///     Raised when we don't have direct source
 /// </summary>
 public sealed class AnnounceSpokeEvent : EntityEventArgs
