@@ -135,7 +135,6 @@
       groups:
         Airloss: -0.5
   - type: ZombieImmune
-  - type: ImmunitetInfectionDead
   - type: LizardAccent
 
 - type: damageModifierSet
