@@ -20,7 +20,6 @@
   jobEntity: StationAiBrain
   jobPreviewEntity: PlayerStationAiPreview
   applyTraits: false
-  startingGear: RobotGear # for char preview only
 
 - type: job
   id: Borg
@@ -35,10 +34,3 @@
   supervisors: job-supervisors-crew
   jobEntity: PlayerBorgBattery
   applyTraits: false
-  startingGear: RobotGear # for char preview only
-
-- type: startingGear
-  id: RobotGear
-  equipment:
-    head: ClothingHeadHatCardborg
-    outerClothing: ClothingOuterCardborg
